@@ -7,22 +7,25 @@
             <Field
               v-for="field in fields.slice(0, 5)"
               :special="field.special"
+              :start="field.start"
               :key="field.index"
-            >{{ field.index }}</Field>
+            ></Field>
           </div>
           <Field
             v-for="field in fields.slice(5, 9)"
             :special="field.special"
+            :start="field.start"
             :key="field.index"
-          >{{ field.index }}</Field>
+          ></Field>
         </div>
 
         <div class="row row--vertical">
           <Field
             v-for="field in fields.slice(9, 10)"
             :special="field.special"
+            :start="field.start"
             :key="field.index"
-          >{{ field.index }}</Field>
+          ></Field>
           <Field
             v-for="(field, index) in [null, null, null, null]"
             special="red"
@@ -34,14 +37,16 @@
           <Field
             v-for="field in fields.slice(10, 14)"
             :special="field.special"
+            :start="field.start"
             :key="field.index"
-          >{{ field.index }}</Field>
+          ></Field>
           <div class="row row--horizontal">
             <Field
               v-for="field in fields.slice(14, 19)"
               :special="field.special"
+              :start="field.start"
               :key="field.index"
-            >{{ field.index }}</Field>
+            ></Field>
           </div>
         </div>
       </div>
@@ -50,8 +55,9 @@
         <Field
           v-for="field in fields.slice(39, 40)"
           :special="field.special"
+          :start="field.start"
           :key="field.index"
-        >{{ field.index }}</Field>
+        ></Field>
         <Field
           v-for="(field, index) in [null, null, null, null]"
           special="green"
@@ -62,8 +68,9 @@
         <Field
           v-for="field in fields.slice(19, 20)"
           :special="field.special"
+          :start="field.start"
           :key="field.index"
-        >{{ field.index }}</Field>
+        ></Field>
       </div>
 
       <div class="row row--horizontal">
@@ -72,14 +79,16 @@
             <Field
               v-for="field in fields.slice(34, 39).reverse()"
               :special="field.special"
+              :start="field.start"
               :key="field.index"
-            >{{ field.index }}</Field>
+            ></Field>
           </div>
           <Field
             v-for="field in fields.slice(30, 34).reverse()"
             :special="field.special"
+            :start="field.start"
             :key="field.index"
-          >{{ field.index }}</Field>
+          ></Field>
         </div>
 
         <div class="row row--vertical">
@@ -91,8 +100,9 @@
           <Field
             v-for="field in fields.slice(29, 30)"
             :special="field.special"
+            :start="field.start"
             :key="field.index"
-          >{{ field.index }}</Field>
+          ></Field>
         </div>
 
         <div class="row row--vertical">
@@ -100,14 +110,16 @@
             <Field
               v-for="field in fields.slice(20, 25).reverse()"
               :special="field.special"
+              :start="field.start"
               :key="field.index"
-            >{{ field.index }}</Field>
+            ></Field>
           </div>
           <Field
             v-for="field in fields.slice(25, 29)"
             :special="field.special"
+            :start="field.start"
             :key="field.index"
-          >{{ field.index }}</Field>
+          ></Field>
         </div>
       </div>
     </div>
@@ -127,12 +139,12 @@ export default {
   },
 
   created() {
-    this.fields = Array(40).fill({ occupied: 0, special: null });
+    this.fields = Array(40).fill({ occupied: 0, special: null, start: false });
 
-    this.fields[0] = { occupied: 0, special: "green" };
-    this.fields[10] = { occupied: 0, special: "red" };
-    this.fields[20] = { occupied: 0, special: "blue" };
-    this.fields[30] = { occupied: 0, special: "yellow" };
+    this.fields[0] = { occupied: 0, special: "green", start: true };
+    this.fields[10] = { occupied: 0, special: "red", start: true };
+    this.fields[20] = { occupied: 0, special: "blue", start: true };
+    this.fields[30] = { occupied: 0, special: "yellow", start: true };
 
     this.fields = this.fields.map((field, index) => ({ ...field, index }));
   }
@@ -140,6 +152,9 @@ export default {
 </script>
 
 <style lang="sass">
+*
+  box-sizing: border-box
+
 #app
   margin: 3rem 0
   display: flex
