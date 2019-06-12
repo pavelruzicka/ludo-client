@@ -1,19 +1,28 @@
 <template>
-  <div
-    class="field"
-    :class="[special ? `field--${special}` : null, empty ? `field--empty` : null, start ? `field--start` : null]"
-  ></div>
+  <div class="field">
+    <div
+      class="circle"
+      :class="[
+        special ? `circle--${special}` : null,
+        empty ? `circle--empty` : null,
+        start ? `circle--start` : null
+      ]"
+    >{{ def }}</div>
+  </div>
 </template>
 
 <script>
 export default {
   name: "field",
-  props: ["empty", "special", "start"]
+  props: ["empty", "special", "start", "def"]
 };
 </script>
 
 <style lang="sass">
 .field
+  padding: .45rem
+
+.circle
   width: 3rem
   height: 3rem
   border: .2rem solid black
@@ -22,7 +31,6 @@ export default {
   justify-content: center
   align-items: center
   border-radius: 50%
-  margin: .35rem
 
   &--empty
     border-color: transparent
@@ -33,6 +41,7 @@ export default {
     justify-content: center
     align-items: center
     font-size: 2rem
+    font-weight: bold
     width: 3rem
     height: 3rem
     position: relative
@@ -41,19 +50,19 @@ export default {
   &--green
     background: rgb(52, 199, 89)
 
-    &.field--start
+    &.circle--start
       transform: rotate(90deg)
 
   &--red
     background: rgb(255, 59, 48)
 
-    &.field--start
+    &.circle--start
       transform: rotate(180deg)
 
   &--blue
     background: rgb(0, 122, 255)
 
-    &.field--start
+    &.circle--start
       transform: rotate(270deg)
 
   &--yellow

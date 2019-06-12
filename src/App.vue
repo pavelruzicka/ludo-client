@@ -12,11 +12,37 @@
             ></Field>
           </div>
           <Field
-            v-for="field in fields.slice(5, 9)"
+            v-for="field in fields.slice(5, 7)"
             :special="field.special"
             :start="field.start"
             :key="field.index"
           ></Field>
+
+          <div class="row row--horizontal">
+            <Field special="green" :def="'c'"></Field>
+            <Field special="green" :def="'d'"></Field>
+            <Field empty="true"/>
+            <Field empty="true"/>
+            <Field
+              v-for="field in fields.slice(7, 8)"
+              :special="field.special"
+              :start="field.start"
+              :key="field.index"
+            ></Field>
+          </div>
+
+          <div class="row row--horizontal">
+            <Field special="green" :def="'a'"></Field>
+            <Field special="green" :def="'b'"></Field>
+            <Field empty="true"/>
+            <Field empty="true"/>
+            <Field
+              v-for="field in fields.slice(8, 9)"
+              :special="field.special"
+              :start="field.start"
+              :key="field.index"
+            ></Field>
+          </div>
         </div>
 
         <div class="row row--vertical">
@@ -34,8 +60,36 @@
         </div>
 
         <div class="row row--vertical">
+          <div class="row row--horizontal">
+            <Field
+              v-for="field in fields.slice(10, 11)"
+              :special="field.special"
+              :start="field.start"
+              :key="field.index"
+            ></Field>
+
+            <Field empty="true"/>
+            <Field empty="true"/>
+            <Field special="red" :def="'a'"></Field>
+            <Field special="red" :def="'b'"></Field>
+          </div>
+
+          <div class="row row--horizontal">
+            <Field
+              v-for="field in fields.slice(11, 12)"
+              :special="field.special"
+              :start="field.start"
+              :key="field.index"
+            ></Field>
+
+            <Field empty="true"/>
+            <Field empty="true"/>
+            <Field special="red" :def="'c'"></Field>
+            <Field special="red" :def="'d'"></Field>
+          </div>
+
           <Field
-            v-for="field in fields.slice(10, 14)"
+            v-for="field in fields.slice(12, 14)"
             :special="field.special"
             :start="field.start"
             :key="field.index"
@@ -83,12 +137,39 @@
               :key="field.index"
             ></Field>
           </div>
+
           <Field
-            v-for="field in fields.slice(30, 34).reverse()"
+            v-for="field in fields.slice(32, 34).reverse()"
             :special="field.special"
             :start="field.start"
             :key="field.index"
           ></Field>
+
+          <div class="row row--horizontal">
+            <Field special="yellow" :def="'a'"></Field>
+            <Field special="yellow" :def="'b'"></Field>
+            <Field empty="true"/>
+            <Field empty="true"/>
+            <Field
+              v-for="field in fields.slice(31, 32)"
+              :special="field.special"
+              :start="field.start"
+              :key="field.index"
+            ></Field>
+          </div>
+
+          <div class="row row--horizontal">
+            <Field special="yellow" :def="'c'"></Field>
+            <Field special="yellow" :def="'d'"></Field>
+            <Field empty="true"/>
+            <Field empty="true"/>
+            <Field
+              v-for="field in fields.slice(30, 31)"
+              :special="field.special"
+              :start="field.start"
+              :key="field.index"
+            ></Field>
+          </div>
         </div>
 
         <div class="row row--vertical">
@@ -114,12 +195,39 @@
               :key="field.index"
             ></Field>
           </div>
+
           <Field
-            v-for="field in fields.slice(25, 29)"
+            v-for="field in fields.slice(25, 27)"
             :special="field.special"
             :start="field.start"
             :key="field.index"
           ></Field>
+
+          <div class="row row--horizontal">
+            <Field
+              v-for="field in fields.slice(27, 28)"
+              :special="field.special"
+              :start="field.start"
+              :key="field.index"
+            ></Field>
+            <Field empty="true"/>
+            <Field empty="true"/>
+            <Field special="blue" :def="'a'"></Field>
+            <Field special="blue" :def="'b'"></Field>
+          </div>
+
+          <div class="row row--horizontal">
+            <Field
+              v-for="field in fields.slice(28, 29)"
+              :special="field.special"
+              :start="field.start"
+              :key="field.index"
+            ></Field>
+            <Field empty="true"/>
+            <Field empty="true"/>
+            <Field special="blue" :def="'c'"></Field>
+            <Field special="blue" :def="'d'"></Field>
+          </div>
         </div>
       </div>
     </div>
@@ -139,6 +247,7 @@ export default {
   },
 
   created() {
+    // fields
     this.fields = Array(40).fill({ occupied: 0, special: null, start: false });
 
     this.fields[0] = { occupied: 0, special: "green", start: true };
