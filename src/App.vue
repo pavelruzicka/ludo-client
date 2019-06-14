@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <div>
+      <button @click="advance()">Advance</button>
+    </div>
+
     <div class="board">
       <div class="row row--horizontal">
         <div class="row row--vertical row--end row--reversed">
@@ -9,6 +13,7 @@
               :special="field.special"
               :start="field.start"
               :key="field.index"
+              :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
           </div>
           <Field
@@ -16,11 +21,12 @@
             :special="field.special"
             :start="field.start"
             :key="field.index"
+            :occupancy="$store.getters.occupancyStatus(field.index)"
           ></Field>
 
           <div class="row row--horizontal">
-            <Field special="green" :def="'c'"></Field>
-            <Field special="green" :def="'d'"></Field>
+            <Field special="green" :occ="'c'"></Field>
+            <Field special="green" :occ="'d'"></Field>
             <Field empty="true"/>
             <Field empty="true"/>
             <Field
@@ -28,12 +34,13 @@
               :special="field.special"
               :start="field.start"
               :key="field.index"
+              :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
           </div>
 
           <div class="row row--horizontal">
-            <Field special="green" :def="'a'"></Field>
-            <Field special="green" :def="'b'"></Field>
+            <Field special="green" :occ="'a'"></Field>
+            <Field special="green" :occ="'b'"></Field>
             <Field empty="true"/>
             <Field empty="true"/>
             <Field
@@ -41,6 +48,7 @@
               :special="field.special"
               :start="field.start"
               :key="field.index"
+              :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
           </div>
         </div>
@@ -51,6 +59,7 @@
             :special="field.special"
             :start="field.start"
             :key="field.index"
+            :occupancy="$store.getters.occupancyStatus(field.index)"
           ></Field>
           <Field
             v-for="(field, index) in [null, null, null, null]"
@@ -66,12 +75,13 @@
               :special="field.special"
               :start="field.start"
               :key="field.index"
+              :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
 
             <Field empty="true"/>
             <Field empty="true"/>
-            <Field special="red" :def="'a'"></Field>
-            <Field special="red" :def="'b'"></Field>
+            <Field special="red"></Field>
+            <Field special="red"></Field>
           </div>
 
           <div class="row row--horizontal">
@@ -80,12 +90,13 @@
               :special="field.special"
               :start="field.start"
               :key="field.index"
+              :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
 
             <Field empty="true"/>
             <Field empty="true"/>
-            <Field special="red" :def="'c'"></Field>
-            <Field special="red" :def="'d'"></Field>
+            <Field special="red"></Field>
+            <Field special="red"></Field>
           </div>
 
           <Field
@@ -93,6 +104,7 @@
             :special="field.special"
             :start="field.start"
             :key="field.index"
+            :occupancy="$store.getters.occupancyStatus(field.index)"
           ></Field>
           <div class="row row--horizontal">
             <Field
@@ -100,6 +112,7 @@
               :special="field.special"
               :start="field.start"
               :key="field.index"
+              :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
           </div>
         </div>
@@ -111,6 +124,7 @@
           :special="field.special"
           :start="field.start"
           :key="field.index"
+          :occupancy="$store.getters.occupancyStatus(field.index)"
         ></Field>
         <Field
           v-for="(field, index) in [null, null, null, null]"
@@ -124,6 +138,7 @@
           :special="field.special"
           :start="field.start"
           :key="field.index"
+          :occupancy="$store.getters.occupancyStatus(field.index)"
         ></Field>
       </div>
 
@@ -135,6 +150,7 @@
               :special="field.special"
               :start="field.start"
               :key="field.index"
+              :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
           </div>
 
@@ -143,11 +159,12 @@
             :special="field.special"
             :start="field.start"
             :key="field.index"
+            :occupancy="$store.getters.occupancyStatus(field.index)"
           ></Field>
 
           <div class="row row--horizontal">
-            <Field special="yellow" :def="'a'"></Field>
-            <Field special="yellow" :def="'b'"></Field>
+            <Field special="yellow"></Field>
+            <Field special="yellow"></Field>
             <Field empty="true"/>
             <Field empty="true"/>
             <Field
@@ -155,12 +172,13 @@
               :special="field.special"
               :start="field.start"
               :key="field.index"
+              :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
           </div>
 
           <div class="row row--horizontal">
-            <Field special="yellow" :def="'c'"></Field>
-            <Field special="yellow" :def="'d'"></Field>
+            <Field special="yellow"></Field>
+            <Field special="yellow"></Field>
             <Field empty="true"/>
             <Field empty="true"/>
             <Field
@@ -168,6 +186,7 @@
               :special="field.special"
               :start="field.start"
               :key="field.index"
+              :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
           </div>
         </div>
@@ -183,6 +202,7 @@
             :special="field.special"
             :start="field.start"
             :key="field.index"
+            :occupancy="$store.getters.occupancyStatus(field.index)"
           ></Field>
         </div>
 
@@ -193,6 +213,7 @@
               :special="field.special"
               :start="field.start"
               :key="field.index"
+              :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
           </div>
 
@@ -201,6 +222,7 @@
             :special="field.special"
             :start="field.start"
             :key="field.index"
+            :occupancy="$store.getters.occupancyStatus(field.index)"
           ></Field>
 
           <div class="row row--horizontal">
@@ -209,11 +231,12 @@
               :special="field.special"
               :start="field.start"
               :key="field.index"
+              :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
             <Field empty="true"/>
             <Field empty="true"/>
-            <Field special="blue" :def="'a'"></Field>
-            <Field special="blue" :def="'b'"></Field>
+            <Field special="blue"></Field>
+            <Field special="blue"></Field>
           </div>
 
           <div class="row row--horizontal">
@@ -222,11 +245,12 @@
               :special="field.special"
               :start="field.start"
               :key="field.index"
+              :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
             <Field empty="true"/>
             <Field empty="true"/>
-            <Field special="blue" :def="'c'"></Field>
-            <Field special="blue" :def="'d'"></Field>
+            <Field special="blue"></Field>
+            <Field special="blue"></Field>
           </div>
         </div>
       </div>
@@ -247,15 +271,24 @@ export default {
   },
 
   created() {
-    // fields
-    this.fields = Array(40).fill({ occupied: 0, special: null, start: false });
+    this.fields = Array(40).fill({ occupied: "", special: null, start: false });
 
-    this.fields[0] = { occupied: 0, special: "green", start: true };
-    this.fields[10] = { occupied: 0, special: "red", start: true };
-    this.fields[20] = { occupied: 0, special: "blue", start: true };
-    this.fields[30] = { occupied: 0, special: "yellow", start: true };
+    this.fields[0] = { occupied: "", special: "green", start: true };
+    this.fields[10] = { occupied: "", special: "red", start: true };
+    this.fields[20] = { occupied: "", special: "blue", start: true };
+    this.fields[30] = { occupied: "", special: "yellow", start: true };
 
     this.fields = this.fields.map((field, index) => ({ ...field, index }));
+  },
+
+  methods: {
+    rollDice() {
+      return Math.floor(Math.random() * 6) + 1;
+    },
+
+    advance() {
+      this.$store.commit("advancePiece", { increment: this.rollDice() });
+    }
   }
 };
 </script>
@@ -265,10 +298,14 @@ export default {
   box-sizing: border-box
 
 #app
-  margin: 3rem 0
+  margin: 1rem 0
   display: flex
   justify-content: center
   align-items: center
+  flex-direction: column
+
+  & button
+    margin-bottom: 2rem
 
 .row
   display: flex
@@ -286,6 +323,6 @@ export default {
     &.row--reversed
       flex-direction: column-reverse
 
-  &--end *
+  &--end > *
     align-self: flex-end
 </style>

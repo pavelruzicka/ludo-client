@@ -7,14 +7,23 @@
         empty ? `circle--empty` : null,
         start ? `circle--start` : null
       ]"
-    >{{ def }}</div>
+    >
+      <Piece v-if="occupancy && occupancy.occupied"/>
+    </div>
   </div>
 </template>
 
 <script>
+import Piece from "./Piece.vue";
+
 export default {
   name: "field",
-  props: ["empty", "special", "start", "def"]
+  components: { Piece },
+  props: ["empty", "special", "start", "occupancy"],
+
+  created() {
+    // console.log(this.occupancy);
+  }
 };
 </script>
 
@@ -42,10 +51,9 @@ export default {
     align-items: center
     font-size: 2rem
     font-weight: bold
-    width: 3rem
     height: 3rem
-    position: relative
     right: 3.25rem
+    position: absolute
 
   &--green
     background: rgb(52, 199, 89)
@@ -67,4 +75,7 @@ export default {
 
   &--yellow
     background: rgb(255, 204, 0)
+
+    &.circle--start
+      transform: rotate(360deg)
 </style>
