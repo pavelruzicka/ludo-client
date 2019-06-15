@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div>
-      <button @click="advance()">Advance</button>
+      <button @click="deploy()">deploy</button>
     </div>
 
     <div class="board">
@@ -294,13 +294,17 @@ export default {
       return Math.floor(Math.random() * 6) + 1;
     },
 
-    advance() {
+    /*advance() {
       this.$store.commit("advancePiece", {
         //increment: this.rollDice(),
         increment: 1,
         color: "yellow",
         piece: "b"
       });
+    }*/
+
+    deploy() {
+      this.$store.commit("deployPiece", { color: "green", piece: "a" });
     }
   }
 };
