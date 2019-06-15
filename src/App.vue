@@ -14,7 +14,7 @@
               :start="field.start"
               :key="field.index"
               :occupancy="$store.getters.occupancyStatus(field.index)"
-            ></Field>
+            />
           </div>
           <Field
             v-for="field in fields.slice(5, 7)"
@@ -22,11 +22,11 @@
             :start="field.start"
             :key="field.index"
             :occupancy="$store.getters.occupancyStatus(field.index)"
-          ></Field>
+          />
 
           <div class="row row--horizontal">
-            <Field special="green" :occupancy="$store.getters.occupancyStatus(602)"></Field>
-            <Field special="green" :occupancy="$store.getters.occupancyStatus(603)"></Field>
+            <Field special="green" :occupancy="$store.getters.occupancyStatus(602)"/>
+            <Field special="green" :occupancy="$store.getters.occupancyStatus(603)"/>
             <Field empty/>
             <Field empty/>
             <Field
@@ -35,12 +35,12 @@
               :start="field.start"
               :key="field.index"
               :occupancy="$store.getters.occupancyStatus(field.index)"
-            ></Field>
+            />
           </div>
 
           <div class="row row--horizontal">
-            <Field special="green" :occupancy="$store.getters.occupancyStatus(600)"></Field>
-            <Field special="green" :occupancy="$store.getters.occupancyStatus(601)"></Field>
+            <Field special="green" :occupancy="$store.getters.occupancyStatus(600)"/>
+            <Field special="green" :occupancy="$store.getters.occupancyStatus(601)"/>
             <Field empty/>
             <Field empty/>
             <Field
@@ -49,7 +49,7 @@
               :start="field.start"
               :key="field.index"
               :occupancy="$store.getters.occupancyStatus(field.index)"
-            ></Field>
+            />
           </div>
         </div>
 
@@ -60,13 +60,13 @@
             :start="field.start"
             :key="field.index"
             :occupancy="$store.getters.occupancyStatus(field.index)"
-          ></Field>
+          />
           <Field
             v-for="(field, index) in [null, null, null, null]"
             special="red"
             :key="3 - index + 100"
             :occupancy="$store.getters.occupancyStatus(3 - index + 100)"
-          ></Field>
+          />
         </div>
 
         <div class="row row--vertical">
@@ -77,12 +77,12 @@
               :start="field.start"
               :key="field.index"
               :occupancy="$store.getters.occupancyStatus(field.index)"
-            ></Field>
+            />
 
             <Field empty/>
             <Field empty/>
-            <Field special="red" :occupancy="$store.getters.occupancyStatus(500)"></Field>
-            <Field special="red" :occupancy="$store.getters.occupancyStatus(501)"></Field>
+            <Field special="red" :occupancy="$store.getters.occupancyStatus(500)"/>
+            <Field special="red" :occupancy="$store.getters.occupancyStatus(501)"/>
           </div>
 
           <div class="row row--horizontal">
@@ -92,12 +92,12 @@
               :start="field.start"
               :key="field.index"
               :occupancy="$store.getters.occupancyStatus(field.index)"
-            ></Field>
+            />
 
             <Field empty/>
             <Field empty/>
-            <Field special="red" :occupancy="$store.getters.occupancyStatus(502)"></Field>
-            <Field special="red" :occupancy="$store.getters.occupancyStatus(503)"></Field>
+            <Field special="red" :occupancy="$store.getters.occupancyStatus(502)"/>
+            <Field special="red" :occupancy="$store.getters.occupancyStatus(503)"/>
           </div>
 
           <Field
@@ -106,7 +106,7 @@
             :start="field.start"
             :key="field.index"
             :occupancy="$store.getters.occupancyStatus(field.index)"
-          ></Field>
+          />
           <div class="row row--horizontal">
             <Field
               v-for="field in fields.slice(14, 19)"
@@ -114,7 +114,7 @@
               :start="field.start"
               :key="field.index"
               :occupancy="$store.getters.occupancyStatus(field.index)"
-            ></Field>
+            />
           </div>
         </div>
       </div>
@@ -126,27 +126,27 @@
           :start="field.start"
           :key="field.index"
           :occupancy="$store.getters.occupancyStatus(field.index)"
-        ></Field>
+        />
         <Field
           v-for="(field, index) in [null, null, null, null]"
           special="green"
           :key="3 - index + 200"
           :occupancy="$store.getters.occupancyStatus(3 - index + 200)"
-        ></Field>
+        />
         <Field empty/>
         <Field
           v-for="(field, index) in [null, null, null, null]"
           special="blue"
           :key="index + 300"
           :occupancy="$store.getters.occupancyStatus(index + 300)"
-        ></Field>
+        />
         <Field
           v-for="field in fields.slice(19, 20)"
           :special="field.special"
           :start="field.start"
           :key="field.index"
           :occupancy="$store.getters.occupancyStatus(field.index)"
-        ></Field>
+        />
       </div>
 
       <div class="row row--horizontal">
@@ -158,7 +158,7 @@
               :start="field.start"
               :key="field.index"
               :occupancy="$store.getters.occupancyStatus(field.index)"
-            ></Field>
+            />
           </div>
 
           <Field
@@ -167,11 +167,11 @@
             :start="field.start"
             :key="field.index"
             :occupancy="$store.getters.occupancyStatus(field.index)"
-          ></Field>
+          />
 
           <div class="row row--horizontal">
-            <Field special="yellow" :occupancy="$store.getters.occupancyStatus(800)"></Field>
-            <Field special="yellow" :occupancy="$store.getters.occupancyStatus(801)"></Field>
+            <Field special="yellow" :occupancy="$store.getters.occupancyStatus(800)"/>
+            <Field special="yellow" :occupancy="$store.getters.occupancyStatus(801)"/>
             <Field empty/>
             <Field empty/>
             <Field
@@ -180,12 +180,12 @@
               :start="field.start"
               :key="field.index"
               :occupancy="$store.getters.occupancyStatus(field.index)"
-            ></Field>
+            />
           </div>
 
           <div class="row row--horizontal">
-            <Field special="yellow" :occupancy="$store.getters.occupancyStatus(802)"></Field>
-            <Field special="yellow" :occupancy="$store.getters.occupancyStatus(803)"></Field>
+            <Field special="yellow" :occupancy="$store.getters.occupancyStatus(802)"/>
+            <Field special="yellow" :occupancy="$store.getters.occupancyStatus(803)"/>
             <Field empty/>
             <Field empty/>
             <Field
@@ -194,7 +194,7 @@
               :start="field.start"
               :key="field.index"
               :occupancy="$store.getters.occupancyStatus(field.index)"
-            ></Field>
+            />
           </div>
         </div>
 
@@ -204,14 +204,14 @@
             special="yellow"
             :key="index + 400"
             :occupancy="$store.getters.occupancyStatus(index + 400)"
-          ></Field>
+          />
           <Field
             v-for="field in fields.slice(29, 30)"
             :special="field.special"
             :start="field.start"
             :key="field.index"
             :occupancy="$store.getters.occupancyStatus(field.index)"
-          ></Field>
+          />
         </div>
 
         <div class="row row--vertical">
@@ -222,7 +222,7 @@
               :start="field.start"
               :key="field.index"
               :occupancy="$store.getters.occupancyStatus(field.index)"
-            ></Field>
+            />
           </div>
 
           <Field
@@ -231,7 +231,7 @@
             :start="field.start"
             :key="field.index"
             :occupancy="$store.getters.occupancyStatus(field.index)"
-          ></Field>
+          />
 
           <div class="row row--horizontal">
             <Field
@@ -240,11 +240,11 @@
               :start="field.start"
               :key="field.index"
               :occupancy="$store.getters.occupancyStatus(field.index)"
-            ></Field>
+            />
             <Field empty/>
             <Field empty/>
-            <Field special="blue" :occupancy="$store.getters.occupancyStatus(700)"></Field>
-            <Field special="blue" :occupancy="$store.getters.occupancyStatus(701)"></Field>
+            <Field special="blue" :occupancy="$store.getters.occupancyStatus(700)"/>
+            <Field special="blue" :occupancy="$store.getters.occupancyStatus(701)"/>
           </div>
 
           <div class="row row--horizontal">
@@ -254,11 +254,11 @@
               :start="field.start"
               :key="field.index"
               :occupancy="$store.getters.occupancyStatus(field.index)"
-            ></Field>
+            />
             <Field empty/>
             <Field empty/>
-            <Field special="blue" :occupancy="$store.getters.occupancyStatus(702)"></Field>
-            <Field special="blue" :occupancy="$store.getters.occupancyStatus(703)"></Field>
+            <Field special="blue" :occupancy="$store.getters.occupancyStatus(702)"/>
+            <Field special="blue" :occupancy="$store.getters.occupancyStatus(703)"/>
           </div>
         </div>
       </div>
