@@ -12,7 +12,7 @@ export default {
       const remainingPieces = state.pieces.filter(p => p !== selection);
       selection.position += increment;
 
-      state = [...remainingPieces, selection];
+      state.pieces = [...remainingPieces, selection];
     } else {
       throw new Error("Cannot advance a non-existent piece");
     }
@@ -27,13 +27,27 @@ export default {
         throw new Error("Cannot redeploy a piece");
       } else {
         const remainingPieces = state.pieces.filter(p => p !== selection);
-        selection.position = constants.startingPositions[color];
+        selection.position = constants.positions.start[color];
         selection.deployed = true;
 
-        state = [...remainingPieces, selection];
+        state.pieces = [...remainingPieces, selection];
       }
     } else {
       throw new Error("Cannot deploy a non-existent piece");
     }
+  },
+
+  spawnSet: (state, payload) => {
+    const { color } = payload;
+    const defPosition = constants.positions.def[color];
+
+    const pieces = ["a", "b", "c", "d"].map((piece, index) => ({
+      color,
+      piece,
+      position: defPosition + index,
+      deployed: false
+    }));
+
+    state.pieces.push(...pieces);
   }
 };

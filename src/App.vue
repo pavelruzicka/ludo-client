@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div>
-      <button @click="deploy()">deploy</button>
+      <button @click="spawn()">spawn</button>
     </div>
 
     <div class="board">
@@ -294,17 +294,20 @@ export default {
       return Math.floor(Math.random() * 6) + 1;
     },
 
-    /*advance() {
-      this.$store.commit("advancePiece", {
-        //increment: this.rollDice(),
-        increment: 1,
-        color: "yellow",
-        piece: "b"
-      });
-    }*/
+    spawn() {
+      this.$store.commit("spawnSet", { color: "red" });
+    },
 
     deploy() {
-      this.$store.commit("deployPiece", { color: "green", piece: "a" });
+      this.$store.commit("deployPiece", { color: "red", piece: "a" });
+    },
+
+    advance() {
+      this.$store.commit("advancePiece", {
+        increment: this.rollDice(),
+        color: "red",
+        piece: "a"
+      });
     }
   }
 };
