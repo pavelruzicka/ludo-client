@@ -25,10 +25,10 @@
           ></Field>
 
           <div class="row row--horizontal">
-            <Field special="green" :occ="'c'"></Field>
-            <Field special="green" :occ="'d'"></Field>
-            <Field empty="true"/>
-            <Field empty="true"/>
+            <Field special="green" :occupancy="$store.getters.occupancyStatus(602)"></Field>
+            <Field special="green" :occupancy="$store.getters.occupancyStatus(603)"></Field>
+            <Field empty/>
+            <Field empty/>
             <Field
               v-for="field in fields.slice(7, 8)"
               :special="field.special"
@@ -39,10 +39,10 @@
           </div>
 
           <div class="row row--horizontal">
-            <Field special="green" :occ="'a'"></Field>
-            <Field special="green" :occ="'b'"></Field>
-            <Field empty="true"/>
-            <Field empty="true"/>
+            <Field special="green" :occupancy="$store.getters.occupancyStatus(600)"></Field>
+            <Field special="green" :occupancy="$store.getters.occupancyStatus(601)"></Field>
+            <Field empty/>
+            <Field empty/>
             <Field
               v-for="field in fields.slice(8, 9)"
               :special="field.special"
@@ -64,7 +64,8 @@
           <Field
             v-for="(field, index) in [null, null, null, null]"
             special="red"
-            :key="index + 100"
+            :key="3 - index + 100"
+            :occupancy="$store.getters.occupancyStatus(3 - index + 100)"
           ></Field>
         </div>
 
@@ -78,10 +79,10 @@
               :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
 
-            <Field empty="true"/>
-            <Field empty="true"/>
-            <Field special="red"></Field>
-            <Field special="red"></Field>
+            <Field empty/>
+            <Field empty/>
+            <Field special="red" :occupancy="$store.getters.occupancyStatus(500)"></Field>
+            <Field special="red" :occupancy="$store.getters.occupancyStatus(501)"></Field>
           </div>
 
           <div class="row row--horizontal">
@@ -93,10 +94,10 @@
               :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
 
-            <Field empty="true"/>
-            <Field empty="true"/>
-            <Field special="red"></Field>
-            <Field special="red"></Field>
+            <Field empty/>
+            <Field empty/>
+            <Field special="red" :occupancy="$store.getters.occupancyStatus(502)"></Field>
+            <Field special="red" :occupancy="$store.getters.occupancyStatus(503)"></Field>
           </div>
 
           <Field
@@ -129,10 +130,16 @@
         <Field
           v-for="(field, index) in [null, null, null, null]"
           special="green"
-          :key="index + 200"
+          :key="3 - index + 200"
+          :occupancy="$store.getters.occupancyStatus(3 - index + 200)"
         ></Field>
-        <Field empty="true"/>
-        <Field v-for="(field, index) in [null, null, null, null]" special="blue" :key="index + 300"></Field>
+        <Field empty/>
+        <Field
+          v-for="(field, index) in [null, null, null, null]"
+          special="blue"
+          :key="index + 300"
+          :occupancy="$store.getters.occupancyStatus(index + 300)"
+        ></Field>
         <Field
           v-for="field in fields.slice(19, 20)"
           :special="field.special"
@@ -163,10 +170,10 @@
           ></Field>
 
           <div class="row row--horizontal">
-            <Field special="yellow"></Field>
-            <Field special="yellow"></Field>
-            <Field empty="true"/>
-            <Field empty="true"/>
+            <Field special="yellow" :occupancy="$store.getters.occupancyStatus(800)"></Field>
+            <Field special="yellow" :occupancy="$store.getters.occupancyStatus(801)"></Field>
+            <Field empty/>
+            <Field empty/>
             <Field
               v-for="field in fields.slice(31, 32)"
               :special="field.special"
@@ -177,10 +184,10 @@
           </div>
 
           <div class="row row--horizontal">
-            <Field special="yellow"></Field>
-            <Field special="yellow"></Field>
-            <Field empty="true"/>
-            <Field empty="true"/>
+            <Field special="yellow" :occupancy="$store.getters.occupancyStatus(802)"></Field>
+            <Field special="yellow" :occupancy="$store.getters.occupancyStatus(803)"></Field>
+            <Field empty/>
+            <Field empty/>
             <Field
               v-for="field in fields.slice(30, 31)"
               :special="field.special"
@@ -196,6 +203,7 @@
             v-for="(field, index) in [null, null, null, null]"
             special="yellow"
             :key="index + 400"
+            :occupancy="$store.getters.occupancyStatus(index + 400)"
           ></Field>
           <Field
             v-for="field in fields.slice(29, 30)"
@@ -233,10 +241,10 @@
               :key="field.index"
               :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
-            <Field empty="true"/>
-            <Field empty="true"/>
-            <Field special="blue"></Field>
-            <Field special="blue"></Field>
+            <Field empty/>
+            <Field empty/>
+            <Field special="blue" :occupancy="$store.getters.occupancyStatus(700)"></Field>
+            <Field special="blue" :occupancy="$store.getters.occupancyStatus(701)"></Field>
           </div>
 
           <div class="row row--horizontal">
@@ -247,10 +255,10 @@
               :key="field.index"
               :occupancy="$store.getters.occupancyStatus(field.index)"
             ></Field>
-            <Field empty="true"/>
-            <Field empty="true"/>
-            <Field special="blue"></Field>
-            <Field special="blue"></Field>
+            <Field empty/>
+            <Field empty/>
+            <Field special="blue" :occupancy="$store.getters.occupancyStatus(702)"></Field>
+            <Field special="blue" :occupancy="$store.getters.occupancyStatus(703)"></Field>
           </div>
         </div>
       </div>
@@ -287,7 +295,12 @@ export default {
     },
 
     advance() {
-      this.$store.commit("advancePiece", { increment: this.rollDice() });
+      this.$store.commit("advancePiece", {
+        //increment: this.rollDice(),
+        increment: 1,
+        color: "yellow",
+        piece: "b"
+      });
     }
   }
 };

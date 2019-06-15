@@ -1,10 +1,15 @@
 <template>
-  <div class="piece piece--green"></div>
+  <div
+    class="piece"
+    :class="[occupancy && occupancy.occupied ? `piece--${occupancy.by.color}` : null]"
+  ></div>
 </template>
 
 <script>
 export default {
-  name: "piece"
+  name: "piece",
+
+  props: ["occupancy"]
 };
 </script>
 

@@ -8,7 +8,8 @@
         start ? `circle--start` : null
       ]"
     >
-      <Piece v-if="occupancy && occupancy.occupied"/>
+      <Piece v-if="occupancy && occupancy.occupied" :occupancy="occupancy"/>
+      <slot v-if="['red', 'green', 'blue', 'yellow'].includes(this.special)"></slot>
     </div>
   </div>
 </template>
@@ -19,7 +20,13 @@ import Piece from "./Piece.vue";
 export default {
   name: "field",
   components: { Piece },
-  props: ["empty", "special", "start", "occupancy"],
+
+  props: {
+    empty: Boolean,
+    special: String,
+    start: Boolean,
+    occupancy: Object
+  },
 
   created() {
     // console.log(this.occupancy);
