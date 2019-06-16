@@ -5,7 +5,7 @@ export default {
     if (selection) {
       return {
         occupied: true,
-        by: { color: selection.color, piece: selection.piece }
+        by: selection
       };
     } else {
       return { occupied: false };

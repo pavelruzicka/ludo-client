@@ -261,7 +261,7 @@
 </template>
 
 <script>
-import Field from "./Field.vue";
+import Field from "./Field";
 
 export default {
   name: "board",

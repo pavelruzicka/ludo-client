@@ -5,8 +5,12 @@
       <button @click="rollDie()">Roll die</button>
     </div>
 
-    <transition name="modal">
+    <transition name="cloak">
       <Modal v-if="modalShown" :roll="dieRoll" @hide-modal="execute"/>
+    </transition>
+
+    <transition name="cloak">
+      <Cloak v-if="awaitStatus"/>
     </transition>
 
     <Board :fields="fields"/>
@@ -18,11 +22,12 @@ import { mapGetters } from "vuex";
 
 import Board from "./components/Board";
 import Modal from "./components/Modal";
+import Cloak from "./components/Cloak";
 
 export default {
   name: "app",
 
-  components: { Board, Modal },
+  components: { Board, Modal, Cloak },
 
   data() {
     return {
@@ -32,7 +37,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["color"])
+    ...mapGetters(["color", "awaitStatus"])
   },
 
   created() {
@@ -56,8 +61,8 @@ export default {
     },
 
     rollDie() {
-      this.dieRoll = Math.floor(Math.random() * 6) + 1;
-      //this.dieRoll = 6;
+      //this.dieRoll = Math.floor(Math.random() * 6) + 1;
+      this.dieRoll = 6;
 
       this.modalShown = true;
     },

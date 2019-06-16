@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Piece from "./Piece.vue";
+import Piece from "./Piece";
 
 export default {
   name: "field",

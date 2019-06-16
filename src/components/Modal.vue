@@ -1,5 +1,5 @@
 <template>
-  <div class="mask">
+  <Cloak>
     <div class="modal">
       <span>{{ roll }}</span>
 
@@ -9,16 +9,20 @@
         <button @click="execute(null)" :disabled="!hasNoPiecesDeployed || ableToDeploy">Close modal</button>
       </div>
     </div>
-  </div>
+  </Cloak>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 
+import Cloak from "./Cloak";
+
 import constants from "../constants";
 
 export default {
   name: "modal",
+
+  components: { Cloak },
 
   props: ["roll"],
 

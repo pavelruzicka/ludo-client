@@ -4,7 +4,7 @@
       'piece',
       occupancy && occupancy.occupied ? `piece--${occupancy.by.color}` : null,
       {
-        'piece--awaiting': this.awaitStatus && this.color === this.occupancy.by.color
+        'piece--awaiting': isAwaiting
       }
     ]"
     @click="advancePiece()"
@@ -13,6 +13,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { setTimeout } from "timers";
 
 export default {
   name: "piece",
@@ -20,7 +21,15 @@ export default {
   props: ["occupancy"],
 
   computed: {
-    ...mapGetters(["awaitStatus", "color"])
+    ...mapGetters(["awaitStatus", "color"]),
+
+    isAwaiting() {
+      return (
+        this.awaitStatus &&
+        this.color === this.occupancy.by.color &&
+        this.occupancy.by.deployed
+      );
+    }
   },
 
   methods: {
@@ -30,8 +39,11 @@ export default {
         const increment = this.$store.getters.lastRoll;
 
         if (color === this.color) {
-          this.$store.commit("advancePiece", { color, piece, increment });
           this.$store.commit("setAwaitStatus", { target: false });
+
+          setTimeout(() => {
+            this.$store.commit("advancePiece", { color, piece, increment });
+          }, 750);
         } else {
           console.error("Cannot move this piece (different color)");
         }

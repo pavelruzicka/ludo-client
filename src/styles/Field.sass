@@ -15,18 +15,18 @@
   &--empty
     border-color: transparent
 
-  &--start:before
+  /*&--start:before
     @include flex-center
     content: '↑'
     font-size: 2rem
     font-weight: bold
     height: 3rem
     right: 3.25rem
-    position: absolute
+    position: absolute*/
 
   @each $name, $color in $background-colors
     &--#{$name}
       background: $color
 
-      &.circle--start
-        transform: rotate(map-get($rotation, $name))
+      /*&.circle--start
+        transform: rotate(map-get($rotation, $name))*/
