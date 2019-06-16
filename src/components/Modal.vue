@@ -15,17 +15,34 @@
 <script>
 import { mapGetters } from "vuex";
 
+import constants from "../constants";
+
 export default {
   name: "modal",
 
   props: ["roll"],
 
   computed: {
-    ...mapGetters(["hasNoPiecesDeployed"]),
+    ...mapGetters(["color", "hasNoPiecesDeployed", "hasPiecesRemaining"]),
 
     ableToDeploy() {
-      // also check if starting point is free
-      return this.roll === 6 && this.$store.getters.hasPiecesRemaining;
+      const startingPosition = constants.positions.start[this.color];
+      const startingPointOccupancy = this.$store.getters.occupancyStatus(
+        startingPosition
+      );
+
+      if (!startingPointOccupancy.occupied) {
+        return this.roll === 6 && this.hasPiecesRemaining;
+      } else {
+        // starting point is occupied, check if by enemy
+        if (startingPointOccupancy.by.color !== this.color) {
+          // enemy
+          return this.roll === 6 && this.hasPiecesRemaining;
+        } else {
+          // cannot deploy into own piece
+          return false;
+        }
+      }
     }
   },
 

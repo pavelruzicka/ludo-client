@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 const initialState = () => ({
   color: "red",
-  remaining: ["a", "b", "c", "d"],
+  remaining: [],
   awaitStatus: false,
   lastRoll: 0,
   pieces: []

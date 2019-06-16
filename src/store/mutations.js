@@ -43,8 +43,9 @@ export default {
   spawnSet: (state, payload) => {
     const { color } = payload;
     const defPosition = constants.positions.def[color];
+    const notation = ["a", "b", "c", "d"];
 
-    const pieces = ["a", "b", "c", "d"].map((piece, index) => ({
+    const pieces = notation.map((piece, index) => ({
       color,
       piece,
       position: defPosition + index,
@@ -52,6 +53,7 @@ export default {
     }));
 
     state.pieces.push(...pieces);
+    state.remaining = notation;
   },
 
   setAwaitStatus: (state, payload) => {
