@@ -4,6 +4,15 @@ const selectMatchingPiece = (state, color, piece) =>
   state.pieces.filter(p => p.color === color && p.piece === piece)[0];
 
 export default {
+  /**
+   * Move game piece forward a set number of fields
+   *
+   * @param {Object} state - Central app state
+   * @param {Number} payload.increment - Desired amount of fields
+   * @param {String} payload.color - Color of game piece to be moved
+   * @param {String} payload.piece - Distinction-enabling game piece notation
+   */
+
   advancePiece: (state, payload) => {
     const { increment, color, piece } = payload;
     const selection = selectMatchingPiece(state, color, piece);
@@ -17,6 +26,14 @@ export default {
       throw new Error("Cannot advance a non-existent piece");
     }
   },
+
+  /**
+   * Deploy game piece from its default point to player's starting field
+   *
+   * @param {Object} state - Central app state
+   * @param {String} payload.color - Color of game piece to be deployed
+   * @param {String} payload.piece - Distinction-enabling game piece notation
+   */
 
   deployPiece: (state, payload) => {
     const { color, piece } = payload;
@@ -40,6 +57,13 @@ export default {
     }
   },
 
+  /**
+   * Spawn a set of four game pieces into player's starting fields
+   *
+   * @param {Object} state - Central app state
+   * @param {String} payload.color - Color of game pieces to spawned in
+   */
+
   spawnSet: (state, payload) => {
     const { color } = payload;
     const defPosition = constants.positions.def[color];
@@ -56,9 +80,23 @@ export default {
     state.remaining = notation;
   },
 
+  /**
+   * Enable game piece selection mode
+   *
+   * @param {Object} state - Central app state
+   * @param {Boolean} payload.target - Target boolean value to set
+   */
+
   setAwaitStatus: (state, payload) => {
     state.awaitStatus = payload.target;
   },
+
+  /**
+   * Save latest die roll value
+   *
+   * @param {Object} state - Central app state
+   * @param {Number} payload.value - Target value to set
+   */
 
   setLastRoll: (state, payload) => {
     state.lastRoll = payload.value;
