@@ -80,11 +80,3 @@ export default {
 </script>
 
 <style lang="sass" src="./styles/App.sass"></style>
-
-<style lang="sass">
-.modal-enter-active, .modal-leave-active
-  transition: all .3s ease
-
-.modal-enter, .modal-leave-to
-  opacity: 0
-</style>
