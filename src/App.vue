@@ -313,36 +313,4 @@ export default {
 };
 </script>
 
-<style lang="sass">
-*
-  box-sizing: border-box
-
-#app
-  margin: 1rem 0
-  display: flex
-  justify-content: center
-  align-items: center
-  flex-direction: column
-
-  & button
-    margin-bottom: 2rem
-
-.row
-  display: flex
-  flex: 0 0 auto
-  
-  &--horizontal
-    flex-direction: row
-
-    &.row--reversed
-      flex-direction: row-reverse
-
-  &--vertical
-    flex-direction: column
-
-    &.row--reversed
-      flex-direction: column-reverse
-
-  &--end > *
-    align-self: flex-end
-</style>
+<style lang="sass" src="./styles/App.sass"></style>
