@@ -6,6 +6,10 @@ import getters from "./getters";
 Vue.use(Vuex);
 
 const initialState = () => ({
+  color: "red",
+  remaining: ["a", "b", "c", "d"],
+  awaitStatus: false,
+  lastRoll: 0,
   pieces: []
 });
 

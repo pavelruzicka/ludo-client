@@ -2,12 +2,12 @@
   <div id="app">
     <div>
       <button @click="spawn()">Spawn set</button>
-      <button @click="deploy()">Deploy piece</button>
+      <button @click="advance()">Advance</button>
       <button @click="rollDie()">Roll die</button>
     </div>
 
     <transition name="modal">
-      <Modal v-if="modalShown" :roll="dieRoll" @hideModal="modalShown = false"/>
+      <Modal v-if="modalShown" :roll="dieRoll" @hide-modal="execute"/>
     </transition>
 
     <Board :fields="fields"/>
@@ -26,11 +26,15 @@ export default {
   data() {
     return {
       modalShown: false,
-      dieRoll: undefined
+      dieRoll: undefined,
+      color: undefined
     };
   },
 
   created() {
+    const { color } = this.$store.getters;
+    this.color = color;
+
     this.fields = Array(40).fill({ occupied: "", special: null, start: false });
 
     this.fields[0] = { occupied: "", special: "green", start: true };
@@ -52,16 +56,33 @@ export default {
 
     advance() {
       this.$store.commit("advancePiece", {
-        increment: this.rollDice(),
+        increment: 2,
         color: "red",
         piece: "a"
       });
     },
 
     rollDie() {
-      this.dieRoll = Math.floor(Math.random() * 6) + 1;
+      //this.dieRoll = Math.floor(Math.random() * 6) + 1;
+      this.dieRoll = 6;
 
       this.modalShown = true;
+    },
+
+    execute({ action }) {
+      this.modalShown = false;
+
+      if (action === "deploy") {
+        const toDeploy = this.$store.getters.pieceToDeploy;
+
+        this.$store.commit("deployPiece", {
+          color: this.color,
+          piece: toDeploy
+        });
+      } else if (action === "move") {
+        this.$store.commit("setLastRoll", { value: this.dieRoll });
+        this.$store.commit("setAwaitStatus", { target: true });
+      }
     }
   }
 };

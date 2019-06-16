@@ -9,9 +9,11 @@
   z-index: 100
 
 .modal
+  @include flex-center
+  flex-direction: column
   background: white
   width: 400px
-  padding: 3rem 1rem
+  padding: 2rem 1rem
   border-radius: .35rem
   text-align: center
   z-index: 101
@@ -19,3 +21,6 @@
   & span
     font-weight: bold
     font-size: 2.5rem
+
+  & button
+    margin: .5rem    

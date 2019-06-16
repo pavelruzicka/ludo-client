@@ -31,6 +31,9 @@ export default {
         selection.deployed = true;
 
         state.pieces = [...remainingPieces, selection];
+        state.remaining = state.remaining.filter(
+          piece => piece !== selection.piece
+        );
       }
     } else {
       throw new Error("Cannot deploy a non-existent piece");
@@ -49,5 +52,13 @@ export default {
     }));
 
     state.pieces.push(...pieces);
+  },
+
+  setAwaitStatus: (state, payload) => {
+    state.awaitStatus = payload.target;
+  },
+
+  setLastRoll: (state, payload) => {
+    state.lastRoll = payload.value;
   }
 };

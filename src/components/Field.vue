@@ -9,7 +9,6 @@
       ]"
     >
       <Piece v-if="occupancy && occupancy.occupied" :occupancy="occupancy"/>
-      <slot v-if="['red', 'green', 'blue', 'yellow'].includes(this.special)"></slot>
     </div>
   </div>
 </template>

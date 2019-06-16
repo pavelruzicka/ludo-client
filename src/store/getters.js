@@ -10,5 +10,15 @@ export default {
     } else {
       return { occupied: false };
     }
-  }
+  },
+
+  hasPiecesRemaining: state => state.remaining.length > 0,
+
+  pieceToDeploy: state => state.remaining[0],
+
+  color: state => state.color,
+
+  awaitStatus: state => state.awaitStatus,
+
+  lastRoll: state => state.lastRoll
 };
