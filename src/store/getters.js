@@ -14,6 +14,8 @@ export default {
 
   hasPiecesRemaining: state => state.remaining.length > 0,
 
+  hasNoPiecesDeployed: state => state.remaining.length === 4,
+
   pieceToDeploy: state => state.remaining[0],
 
   color: state => state.color,

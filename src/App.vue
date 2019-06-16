@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import Board from "./components/Board";
 import Modal from "./components/Modal";
 
@@ -25,15 +27,15 @@ export default {
   data() {
     return {
       modalShown: false,
-      dieRoll: undefined,
-      color: undefined
+      dieRoll: undefined
     };
   },
 
-  created() {
-    const { color } = this.$store.getters;
-    this.color = color;
+  computed: {
+    ...mapGetters(["color"])
+  },
 
+  created() {
     this.fields = Array(40).fill({ occupied: "", special: null, start: false });
 
     this.fields[0] = { occupied: "", special: "green", start: true };
@@ -70,7 +72,7 @@ export default {
           color: this.color,
           piece: toDeploy
         });
-      } else if (action === "move") {
+      } else if (action === "advance") {
         this.$store.commit("setLastRoll", { value: this.dieRoll });
         this.$store.commit("setAwaitStatus", { target: true });
       }
