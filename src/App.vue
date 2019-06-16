@@ -2,7 +2,6 @@
   <div id="app">
     <div>
       <button @click="spawn()">Spawn set</button>
-      <button @click="advance()">Advance</button>
       <button @click="rollDie()">Roll die</button>
     </div>
 
@@ -54,17 +53,9 @@ export default {
       this.$store.commit("deployPiece", { color: "red", piece: "a" });
     },
 
-    advance() {
-      this.$store.commit("advancePiece", {
-        increment: 2,
-        color: "red",
-        piece: "a"
-      });
-    },
-
     rollDie() {
-      //this.dieRoll = Math.floor(Math.random() * 6) + 1;
-      this.dieRoll = 6;
+      this.dieRoll = Math.floor(Math.random() * 6) + 1;
+      //this.dieRoll = 6;
 
       this.modalShown = true;
     },

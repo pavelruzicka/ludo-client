@@ -1,7 +1,12 @@
 <template>
   <div
-    class="piece"
-    :class="[occupancy && occupancy.occupied ? `piece--${occupancy.by.color}` : null]"
+    :class="[
+      'piece',
+      occupancy && occupancy.occupied ? `piece--${occupancy.by.color}` : null,
+      {
+        'piece--awaiting': this.awaitStatus && this.color === this.occupancy.by.color
+      }
+    ]"
     @click="advancePiece()"
   ></div>
 </template>
@@ -15,7 +20,7 @@ export default {
   props: ["occupancy"],
 
   computed: {
-    ...mapGetters(["awaitStatus"])
+    ...mapGetters(["awaitStatus", "color"])
   },
 
   methods: {
@@ -24,10 +29,14 @@ export default {
         const { color, piece } = this.occupancy.by;
         const increment = this.$store.getters.lastRoll;
 
-        this.$store.commit("advancePiece", { color, piece, increment });
-        this.$store.commit("setAwaitStatus", { target: false });
+        if (color === this.color) {
+          this.$store.commit("advancePiece", { color, piece, increment });
+          this.$store.commit("setAwaitStatus", { target: false });
+        } else {
+          console.error("Cannot move this piece (different color)");
+        }
       } else {
-        console.error("Cannot move this piece");
+        console.error("Cannot move this piece (not awaiting selection)");
       }
     }
   }

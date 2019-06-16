@@ -10,3 +10,6 @@
   @each $name, $color in $piece-colors
     &--#{$name}
       background: linear-gradient(to top, $color, lighten($color, 10%))
+
+  &--awaiting
+    cursor: pointer
