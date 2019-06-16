@@ -1,0 +1,21 @@
+@import "mixins"
+
+.mask
+  @include flex-center
+  position: absolute
+  width: 100%
+  height: calc(100% + 29px)
+  background: rgba(black, .5)
+  z-index: 100
+
+.modal
+  background: white
+  width: 400px
+  padding: 3rem 1rem
+  border-radius: .35rem
+  text-align: center
+  z-index: 101
+
+  & span
+    font-weight: bold
+    font-size: 2.5rem

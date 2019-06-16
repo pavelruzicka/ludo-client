@@ -1,23 +1,33 @@
 <template>
   <div id="app">
     <div>
-      <button @click="spawn()">spawn</button>
+      <button @click="spawn()">Spawn set</button>
+      <button @click="deploy()">Deploy piece</button>
+      <button @click="rollDie()">Roll die</button>
     </div>
+
+    <transition name="modal">
+      <Modal v-if="modalShown" :roll="dieRoll" @hideModal="modalShown = false"/>
+    </transition>
 
     <Board :fields="fields"/>
   </div>
 </template>
 
 <script>
-import Board from "./components/Board.vue";
+import Board from "./components/Board";
+import Modal from "./components/Modal";
 
 export default {
   name: "app",
 
-  components: { Board },
+  components: { Board, Modal },
 
   data() {
-    return {};
+    return {
+      modalShown: false,
+      dieRoll: undefined
+    };
   },
 
   created() {
@@ -32,10 +42,6 @@ export default {
   },
 
   methods: {
-    rollDice() {
-      return Math.floor(Math.random() * 6) + 1;
-    },
-
     spawn() {
       this.$store.commit("spawnSet", { color: "red" });
     },
@@ -50,9 +56,23 @@ export default {
         color: "red",
         piece: "a"
       });
+    },
+
+    rollDie() {
+      this.dieRoll = Math.floor(Math.random() * 6) + 1;
+
+      this.modalShown = true;
     }
   }
 };
 </script>
 
 <style lang="sass" src="./styles/App.sass"></style>
+
+<style lang="sass">
+.modal-enter-active, .modal-leave-active
+  transition: all .3s ease
+
+.modal-enter, .modal-leave-to
+  opacity: 0
+</style>
