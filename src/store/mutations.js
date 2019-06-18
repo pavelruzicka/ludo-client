@@ -1,3 +1,4 @@
+import getters from "./getters";
 import constants from "../constants";
 
 const selectMatchingPiece = (state, color, piece) =>
@@ -19,7 +20,46 @@ export default {
 
     if (selection) {
       const remainingPieces = state.pieces.filter(p => p !== selection);
-      selection.position += increment;
+      const { start, end } = constants.positions.precedingHome[color];
+
+      if (selection.position >= start && selection.position <= end) {
+        // possibly in zone preceding own home
+
+        if (selection.position + increment <= end) {
+          // unable to reach home, advance regularly
+          selection.position += increment;
+        } else {
+          if (selection.position + increment <= end + 4) {
+            // able to reach home, check occupancy
+            const homePosition =
+              constants.positions.home[color] -
+              selection.position -
+              increment +
+              end +
+              1;
+
+            const field = state.pieces.filter(
+              p => p.position === homePosition
+            )[0];
+
+            if (!field) {
+              // desired position not occupied
+              selection.position = homePosition;
+              selection.home = true;
+            }
+          } else {
+            // dice roll out of home range, notify player
+          }
+        }
+      } else {
+        // not preceding own home
+        selection.position += increment;
+
+        if (selection.position > 39) {
+          // ensure board circularity
+          selection.position -= 40;
+        }
+      }
 
       state.pieces = [...remainingPieces, selection];
     } else {
@@ -73,7 +113,8 @@ export default {
       color,
       piece,
       position: defPosition + index,
-      deployed: false
+      deployed: false,
+      home: false
     }));
 
     state.pieces.push(...pieces);

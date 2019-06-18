@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <div>
-      <button @click="spawn()">Spawn set</button>
       <button @click="rollDie()">Roll die</button>
+      <button @click="test()">Move by five</button>
+      <button @click="test2()">Move by four</button>
     </div>
 
     <transition name="cloak">
@@ -49,6 +50,8 @@ export default {
     this.fields[30] = { occupied: "", special: "yellow", start: true };
 
     this.fields = this.fields.map((field, index) => ({ ...field, index }));
+
+    this.spawn();
   },
 
   methods: {
@@ -65,6 +68,22 @@ export default {
       this.dieRoll = 6;
 
       this.modalShown = true;
+    },
+
+    test() {
+      this.$store.commit("advancePiece", {
+        color: "red",
+        piece: "a",
+        increment: 5
+      });
+    },
+
+    test2() {
+      this.$store.commit("advancePiece", {
+        color: "red",
+        piece: "a",
+        increment: 4
+      });
     },
 
     execute({ action }) {

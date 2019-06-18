@@ -18,7 +18,7 @@ import { setTimeout } from "timers";
 export default {
   name: "piece",
 
-  props: ["occupancy"],
+  props: ["occupancy", "index"],
 
   computed: {
     ...mapGetters(["awaitStatus", "color"]),
@@ -27,7 +27,8 @@ export default {
       return (
         this.awaitStatus &&
         this.color === this.occupancy.by.color &&
-        this.occupancy.by.deployed
+        this.occupancy.by.deployed &&
+        this.index < 40
       );
     }
   },
@@ -43,7 +44,7 @@ export default {
 
           setTimeout(() => {
             this.$store.commit("advancePiece", { color, piece, increment });
-          }, 750);
+          }, 500);
         } else {
           console.error("Cannot move this piece (different color)");
         }

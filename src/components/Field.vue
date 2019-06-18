@@ -8,7 +8,7 @@
         start ? `circle--start` : null
       ]"
     >
-      <Piece v-if="occupancy && occupancy.occupied" :occupancy="occupancy"/>
+      <Piece v-if="occupancy && occupancy.occupied" :occupancy="occupancy" :index="index"/>
     </div>
   </div>
 </template>
@@ -23,6 +23,7 @@ export default {
   props: {
     empty: Boolean,
     special: String,
+    index: Number,
     start: Boolean,
     occupancy: Object
   },
