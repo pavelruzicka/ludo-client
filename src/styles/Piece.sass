@@ -5,6 +5,10 @@
   flex-basis: 1.85rem
   border-radius: 50%
   opacity: 1
+  animation-name: test
+  animation-duration: 6s
+  animation-fill-mode: forwards
+  animation-timing-function: ease-in-out
   box-shadow: inset 0px -8px 2px 0px rgba(black, 0.19), inset 0px -4px 0px 0px rgba(black, 0.12)
 
   @each $name, $color in $piece-colors
@@ -14,3 +18,13 @@
   &--awaiting
     cursor: pointer
     z-index: 105
+
+@keyframes test
+  0%
+    transform: translate(0, 0)
+  
+  50%
+    transform: translate(11.7rem, 0)
+  
+  100%
+    transform: translate(11.7rem, 11.7rem)

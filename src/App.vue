@@ -2,8 +2,6 @@
   <div id="app">
     <div>
       <button @click="rollDie()">Roll die</button>
-      <button @click="test()">Move by five</button>
-      <button @click="test2()">Move by four</button>
     </div>
 
     <transition name="cloak">
@@ -19,6 +17,8 @@
 </template>
 
 <script>
+import animations from "./animations";
+
 import { mapGetters } from "vuex";
 
 import Board from "./components/Board";
@@ -52,6 +52,8 @@ export default {
     this.fields = this.fields.map((field, index) => ({ ...field, index }));
 
     this.spawn();
+
+    console.log(animations.analyzeRoute(23, 400));
   },
 
   methods: {
@@ -59,31 +61,11 @@ export default {
       this.$store.commit("spawnSet", { color: "red" });
     },
 
-    deploy() {
-      this.$store.commit("deployPiece", { color: "red", piece: "a" });
-    },
-
     rollDie() {
-      //this.dieRoll = Math.floor(Math.random() * 6) + 1;
-      this.dieRoll = 6;
+      this.dieRoll = Math.floor(Math.random() * 6) + 1;
+      //this.dieRoll = 6;
 
       this.modalShown = true;
-    },
-
-    test() {
-      this.$store.commit("advancePiece", {
-        color: "red",
-        piece: "a",
-        increment: 5
-      });
-    },
-
-    test2() {
-      this.$store.commit("advancePiece", {
-        color: "red",
-        piece: "a",
-        increment: 4
-      });
     },
 
     execute({ action }) {

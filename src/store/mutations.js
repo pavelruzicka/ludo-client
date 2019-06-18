@@ -1,4 +1,3 @@
-import getters from "./getters";
 import constants from "../constants";
 
 const selectMatchingPiece = (state, color, piece) =>
@@ -16,11 +15,12 @@ export default {
 
   advancePiece: (state, payload) => {
     const { increment, color, piece } = payload;
+    const { precedingHome, home } = constants.positions;
     const selection = selectMatchingPiece(state, color, piece);
 
     if (selection) {
       const remainingPieces = state.pieces.filter(p => p !== selection);
-      const { start, end } = constants.positions.precedingHome[color];
+      const { start, end } = precedingHome[color];
 
       if (selection.position >= start && selection.position <= end) {
         // possibly in zone preceding own home
@@ -32,11 +32,7 @@ export default {
           if (selection.position + increment <= end + 4) {
             // able to reach home, check occupancy
             const homePosition =
-              constants.positions.home[color] -
-              selection.position -
-              increment +
-              end +
-              1;
+              home[color] - selection.position - increment + end + 1;
 
             const field = state.pieces.filter(
               p => p.position === homePosition
@@ -45,6 +41,7 @@ export default {
             if (!field) {
               // desired position not occupied
               selection.position = homePosition;
+              selection.deployed = false;
               selection.home = true;
             }
           } else {
