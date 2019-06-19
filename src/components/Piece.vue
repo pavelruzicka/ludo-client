@@ -7,14 +7,16 @@
         'piece--awaiting': isAwaiting
       }
     ]"
-    :style="transformStyle"
+    :style="animationAwait === index ? transformStyle : null"
     @click="advancePiece()"
   ></div>
 </template>
 
 <script>
+import animate from "../animations";
+import getAllPoints from "../animations/points";
+
 import { mapGetters } from "vuex";
-import { setTimeout } from "timers";
 
 export default {
   name: "piece",
@@ -22,7 +24,7 @@ export default {
   props: ["occupancy", "index"],
 
   computed: {
-    ...mapGetters(["awaitStatus", "color", "transformStyle"]),
+    ...mapGetters(["awaitStatus", "animationAwait", "color", "transformStyle"]),
 
     isAwaiting() {
       return (
@@ -41,11 +43,18 @@ export default {
         const increment = this.$store.getters.lastRoll;
 
         if (color === this.color) {
+          const self = this;
+          const { points } = getAllPoints(this.index, this.index + increment);
+
           this.$store.commit("setAwaitStatus", { target: false });
+          this.$store.commit("setAnimationAwait", { target: this.index });
+          animate(self, this.index, this.index + increment);
 
           setTimeout(() => {
-            this.$store.commit("advancePiece", { color, piece, increment });
-          }, 500);
+            self.$store.commit("setTransformStyle", { x: 0, y: 0 });
+            self.$store.commit("advancePiece", { color, piece, increment });
+            self.$store.commit("setAnimationAwait", { target: 0 });
+          }, 300 * points.length);
         } else {
           console.error("Cannot move this piece (different color)");
         }

@@ -127,6 +127,10 @@ export default {
     state.awaitStatus = payload.target;
   },
 
+  setAnimationAwait: (state, payload) => {
+    state.animationAwait = payload.target;
+  },
+
   /**
    * Save latest die roll value
    *

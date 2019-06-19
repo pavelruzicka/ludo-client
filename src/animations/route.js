@@ -26,5 +26,5 @@ export default (from, to) => {
     }
   }
 
-  return path;
+  return [route, path];
 };

@@ -22,6 +22,8 @@ export default {
 
   awaitStatus: state => state.awaitStatus,
 
+  animationAwait: state => state.animationAwait,
+
   lastRoll: state => state.lastRoll,
 
   transformStyle: state => state.transformStyle

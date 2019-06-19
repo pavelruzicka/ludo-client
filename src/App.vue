@@ -2,7 +2,6 @@
   <div id="app">
     <div>
       <button @click="rollDie()">Roll die</button>
-      <button @click="animate()">Test</button>
     </div>
 
     <transition name="cloak">
@@ -18,14 +17,11 @@
 </template>
 
 <script>
-import animate from "./animations";
-
 import { mapGetters } from "vuex";
 
 import Board from "./components/Board";
 import Modal from "./components/Modal";
 import Cloak from "./components/Cloak";
-import { setTimeout } from "timers";
 
 export default {
   name: "app",
@@ -62,8 +58,8 @@ export default {
     },
 
     rollDie() {
-      this.dieRoll = Math.floor(Math.random() * 6) + 1;
-      //this.dieRoll = 6;
+      //this.dieRoll = Math.floor(Math.random() * 6) + 1;
+      this.dieRoll = 6;
 
       this.modalShown = true;
     },
@@ -81,11 +77,8 @@ export default {
       } else if (action === "advance") {
         this.$store.commit("setLastRoll", { value: this.dieRoll });
         this.$store.commit("setAwaitStatus", { target: true });
+        this.$store.commit("setAnimationAwait", { target: true });
       }
-    },
-
-    animate() {
-      animate(this, 22, 400);
     }
   }
 };
