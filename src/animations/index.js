@@ -1,6 +1,8 @@
 import analyzeRoute from "./route";
 import transform from "./transform";
 
+import constants from "../constants";
+
 /**
  * Executes animation based on directions, pass them onwards
  *
@@ -16,7 +18,7 @@ export default (self, from, to) => {
   for (let [index, transform] of transformed.entries()) {
     setTimeout(() => {
       self.$store.commit("setTransformStyle", transform);
-    }, 300 * (index + 1));
+    }, constants.movement.animationStepTime * (index + 1));
   }
 
   return sequence;

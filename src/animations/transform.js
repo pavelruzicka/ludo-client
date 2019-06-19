@@ -1,3 +1,5 @@
+import constants from "../constants";
+
 /**
  * @typedef {Object} Translation
  * @property {Number} x - X coordinate of translation
@@ -12,22 +14,23 @@
  */
 
 export default directions => {
+  const { translationValue } = constants.movement;
   const running = { x: 0, y: 0 };
   const transform = [];
 
   for (let direction of directions) {
     switch (direction) {
       case "left":
-        running.x -= 3.9;
+        running.x -= translationValue;
         break;
       case "right":
-        running.x += 3.9;
+        running.x += translationValue;
         break;
       case "up":
-        running.y -= 3.9;
+        running.y -= translationValue;
         break;
       case "down":
-        running.y += 3.9;
+        running.y += translationValue;
         break;
     }
 

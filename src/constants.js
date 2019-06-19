@@ -57,6 +57,8 @@ export default {
       29: { direction: "up" },
       39: { direction: "right" }
     },
-    bindings: { 100: 9, 200: 39, 300: 19, 400: 29 }
+    bindings: { 100: 9, 200: 39, 300: 19, 400: 29 },
+    translationValue: 3.9,
+    animationStepTime: 300
   }
 };

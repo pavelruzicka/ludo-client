@@ -17,6 +17,8 @@ import animate from "../animations";
 import getAllPoints from "../animations/points";
 import targetField from "../logic/targetField";
 
+import constants from "../constants";
+
 import { mapGetters } from "vuex";
 
 export default {
@@ -60,7 +62,7 @@ export default {
             self.$store.commit("setTransformStyle", { x: 0, y: 0 });
             self.$store.commit("advancePiece", { color, piece, increment });
             self.$store.commit("setAnimationAwait", { target: 0 });
-          }, 300 * directions.length);
+          }, constants.movement.animationStepTime * directions.length);
         }
       }
     }
