@@ -11,5 +11,5 @@ export default (self, from, to) => {
     }, 300 * (index + 1));
   }
 
-  return route;
+  return sequence;
 };

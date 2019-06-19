@@ -10,8 +10,6 @@ export default (start, end) => {
     };
   }
 
-  console.log("irregular");
-
   return {
     points: [
       ...Array(

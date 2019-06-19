@@ -15,6 +15,7 @@
 <script>
 import animate from "../animations";
 import getAllPoints from "../animations/points";
+import targetField from "../logic/targetField";
 
 import { mapGetters } from "vuex";
 
@@ -44,17 +45,19 @@ export default {
 
         if (color === this.color) {
           const self = this;
-          const { points } = getAllPoints(this.index, this.index + increment);
 
           this.$store.commit("setAwaitStatus", { target: false });
           this.$store.commit("setAnimationAwait", { target: this.index });
-          animate(self, this.index, this.index + increment);
+
+          const destination = targetField(this.index, increment, this.color);
+
+          const directions = animate(self, this.index, destination);
 
           setTimeout(() => {
             self.$store.commit("setTransformStyle", { x: 0, y: 0 });
             self.$store.commit("advancePiece", { color, piece, increment });
             self.$store.commit("setAnimationAwait", { target: 0 });
-          }, 300 * points.length);
+          }, 300 * directions.length);
         } else {
           console.error("Cannot move this piece (different color)");
         }
