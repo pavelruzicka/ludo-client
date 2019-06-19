@@ -1,22 +1,20 @@
-import constants from "../constants";
+import matchingPiece from "../logic/matchingPiece";
 
-const selectMatchingPiece = (state, color, piece) =>
-  state.pieces.filter(p => p.color === color && p.piece === piece)[0];
+import constants from "../constants";
 
 export default {
   /**
-   * Move game piece forward a set number of fields
+   * Moves game piece forward a set number of fields
    *
    * @param {Object} state - Central app state
    * @param {Number} payload.increment - Desired amount of fields
    * @param {String} payload.color - Color of game piece to be moved
    * @param {String} payload.piece - Distinction-enabling game piece notation
    */
-
   advancePiece: (state, payload) => {
     const { increment, color, piece } = payload;
     const { precedingHome, home } = constants.positions;
-    const selection = selectMatchingPiece(state, color, piece);
+    const selection = matchingPiece(state, color, piece);
 
     if (!selection) {
       throw new Error("Cannot advance a non-existent piece");
@@ -63,16 +61,15 @@ export default {
   },
 
   /**
-   * Deploy game piece from its default point to player's starting field
+   * Deploys game piece from its default point to player's starting field
    *
    * @param {Object} state - Central app state
    * @param {String} payload.color - Color of game piece to be deployed
    * @param {String} payload.piece - Distinction-enabling game piece notation
    */
-
   deployPiece: (state, payload) => {
     const { color, piece } = payload;
-    const selection = selectMatchingPiece(state, color, piece);
+    const selection = matchingPiece(state, color, piece);
 
     if (selection) {
       if (selection.deployed) {
@@ -93,12 +90,11 @@ export default {
   },
 
   /**
-   * Spawn a set of four game pieces into player's starting fields
+   * Spawns a set of four game pieces into player's starting fields
    *
    * @param {Object} state - Central app state
    * @param {String} payload.color - Color of game pieces to spawned in
    */
-
   spawnSet: (state, payload) => {
     const { color } = payload;
     const defPosition = constants.positions.def[color];
@@ -117,31 +113,42 @@ export default {
   },
 
   /**
-   * Enable game piece selection mode
+   * Enables game piece selection mode
    *
    * @param {Object} state - Central app state
    * @param {Boolean} payload.target - Target boolean value to set
    */
-
   setAwaitStatus: (state, payload) => {
     state.awaitStatus = payload.target;
   },
 
+  /**
+   * Enables animation mode
+   *
+   * @param {Object} state - Central app state
+   * @param {Number} payload.target - Current location of animated piece
+   */
   setAnimationAwait: (state, payload) => {
     state.animationAwait = payload.target;
   },
 
   /**
-   * Save latest die roll value
+   * Saves latest die roll value
    *
    * @param {Object} state - Central app state
    * @param {Number} payload.value - Target value to set
    */
-
   setLastRoll: (state, payload) => {
     state.lastRoll = payload.value;
   },
 
+  /**
+   * Saves latest animation translation step
+   *
+   * @param {Object} state - Central app state
+   * @param {Number} payload.x - X coordinate to use
+   * @param {Number} payload.y - Y coordinate to use
+   */
   setTransformStyle: (state, payload) => {
     state.transformStyle = {
       transform: `translate(${payload.x}rem, ${payload.y}rem)`
