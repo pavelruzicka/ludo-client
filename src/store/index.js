@@ -12,8 +12,8 @@ const initialState = () => ({
   animationAwait: false,
   lastRoll: 0,
   pieces: [
-    { color: "red", piece: "a", position: 10, deployed: true, home: false },
-    { color: "red", piece: "b", position: 7, deployed: true, home: false },
+    { color: "red", piece: "a", position: 37, deployed: true, home: false },
+    { color: "red", piece: "b", position: 17, deployed: true, home: false },
     { color: "green", piece: "b", position: 25, deployed: true, home: false }
   ],
   transformStyle: { transform: "" }

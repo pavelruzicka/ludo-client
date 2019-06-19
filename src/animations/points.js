@@ -24,11 +24,25 @@ const isRegularField = n => n > -1 && n < 40;
  */
 export default (start, end) => {
   if (isRegularField(start) && isRegularField(end)) {
+    if (end < start) {
+      // wraparound
+
+      return {
+        points: [
+          ...[...Array(40 - start).keys()].map(i => i + start),
+          ...Array(end + 1).keys()
+        ],
+        regular: true
+      };
+    }
+
     return {
       points: [...Array(end - start + 1).keys()].map(i => i + start),
       regular: true
     };
   }
+
+  // throws when overshooting home
 
   return {
     points: [

@@ -58,8 +58,8 @@ export default {
     },
 
     rollDie() {
-      this.dieRoll = Math.floor(Math.random() * 6) + 1;
-      //this.dieRoll = 2;
+      //this.dieRoll = Math.floor(Math.random() * 6) + 1;
+      this.dieRoll = 6;
 
       this.modalShown = true;
     },

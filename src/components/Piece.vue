@@ -14,7 +14,6 @@
 
 <script>
 import animate from "../animations";
-import getAllPoints from "../animations/points";
 import targetField from "../logic/targetField";
 
 import constants from "../constants";

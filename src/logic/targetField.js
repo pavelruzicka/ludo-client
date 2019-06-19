@@ -9,9 +9,9 @@ export default (position, increment, color) => {
         constants.positions.home[color] - position - increment + range.end + 1
       );
     } else {
-      return position + increment;
+      return (position + increment) % 40;
     }
   } else {
-    return position + increment;
+    return (position + increment) % 40;
   }
 };

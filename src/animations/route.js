@@ -17,12 +17,12 @@ export default (from, to) => {
   for (let [index, node] of route.points.entries()) {
     const subsequentNode = route.points[index + 1];
 
-    if (subsequentNode) {
+    if (subsequentNode !== undefined) {
       const range = ranges.filter(
         r => subsequentNode >= r.start && subsequentNode <= r.end
       )[0];
 
-      path.push(range ? range.direction : "up");
+      path.push([0, 39].includes(subsequentNode) ? "up" : range.direction);
     } else {
       if (!route.regular) {
         const homeBase = Math.floor(route.end / 100) * 100;
