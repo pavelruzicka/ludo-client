@@ -7,6 +7,7 @@
         'piece--awaiting': isAwaiting
       }
     ]"
+    :style="transformStyle"
     @click="advancePiece()"
   ></div>
 </template>
@@ -21,7 +22,7 @@ export default {
   props: ["occupancy", "index"],
 
   computed: {
-    ...mapGetters(["awaitStatus", "color"]),
+    ...mapGetters(["awaitStatus", "color", "transformStyle"]),
 
     isAwaiting() {
       return (

@@ -8,8 +8,8 @@
         start ? `circle--start` : null
       ]"
     >
-      <!--<Piece v-if="occupancy && occupancy.occupied" :occupancy="occupancy" :index="index"/>-->
-      {{index}}
+      <Piece v-if="occupancy && occupancy.occupied" :occupancy="occupancy" :index="index"/>
+      <!-- {{index}} -->
     </div>
   </div>
 </template>

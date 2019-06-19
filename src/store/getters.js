@@ -22,5 +22,7 @@ export default {
 
   awaitStatus: state => state.awaitStatus,
 
-  lastRoll: state => state.lastRoll
+  lastRoll: state => state.lastRoll,
+
+  transformStyle: state => state.transformStyle
 };

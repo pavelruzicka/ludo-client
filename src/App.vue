@@ -2,6 +2,7 @@
   <div id="app">
     <div>
       <button @click="rollDie()">Roll die</button>
+      <button @click="animate()">Test</button>
     </div>
 
     <transition name="cloak">
@@ -17,13 +18,14 @@
 </template>
 
 <script>
-import animations from "./animations";
+import animate from "./animations";
 
 import { mapGetters } from "vuex";
 
 import Board from "./components/Board";
 import Modal from "./components/Modal";
 import Cloak from "./components/Cloak";
+import { setTimeout } from "timers";
 
 export default {
   name: "app",
@@ -51,9 +53,7 @@ export default {
 
     this.fields = this.fields.map((field, index) => ({ ...field, index }));
 
-    this.spawn();
-
-    console.log(animations.analyzeRoute(23, 400));
+    // this.spawn();
   },
 
   methods: {
@@ -82,6 +82,10 @@ export default {
         this.$store.commit("setLastRoll", { value: this.dieRoll });
         this.$store.commit("setAwaitStatus", { target: true });
       }
+    },
+
+    animate() {
+      animate(this, 22, 400);
     }
   }
 };

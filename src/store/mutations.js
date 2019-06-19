@@ -18,7 +18,9 @@ export default {
     const { precedingHome, home } = constants.positions;
     const selection = selectMatchingPiece(state, color, piece);
 
-    if (selection) {
+    if (!selection) {
+      throw new Error("Cannot advance a non-existent piece");
+    } else {
       const remainingPieces = state.pieces.filter(p => p !== selection);
       const { start, end } = precedingHome[color];
 
@@ -31,16 +33,14 @@ export default {
         } else {
           if (selection.position + increment <= end + 4) {
             // able to reach home, check occupancy
-            const homePosition =
+            const homePos =
               home[color] - selection.position - increment + end + 1;
 
-            const field = state.pieces.filter(
-              p => p.position === homePosition
-            )[0];
+            const field = state.pieces.filter(p => p.position === homePos)[0];
 
             if (!field) {
               // desired position not occupied
-              selection.position = homePosition;
+              selection.position = homePos;
               selection.deployed = false;
               selection.home = true;
             }
@@ -59,8 +59,6 @@ export default {
       }
 
       state.pieces = [...remainingPieces, selection];
-    } else {
-      throw new Error("Cannot advance a non-existent piece");
     }
   },
 
@@ -138,5 +136,11 @@ export default {
 
   setLastRoll: (state, payload) => {
     state.lastRoll = payload.value;
+  },
+
+  setTransformStyle: (state, payload) => {
+    state.transformStyle = {
+      transform: `translate(${payload.x}rem, ${payload.y}rem)`
+    };
   }
 };

@@ -10,7 +10,10 @@ const initialState = () => ({
   remaining: [],
   awaitStatus: false,
   lastRoll: 0,
-  pieces: []
+  pieces: [
+    { color: "yellow", piece: "a", position: 22, deployed: true, home: false }
+  ],
+  transformStyle: { transform: "" }
 });
 
 export default new Vuex.Store({
