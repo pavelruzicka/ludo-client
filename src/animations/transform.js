@@ -1,3 +1,16 @@
+/**
+ * @typedef {Object} Translation
+ * @property {Number} x - X coordinate of translation
+ * @property {Number} y - Y coordinate of translation
+ */
+
+/**
+ * Transforms set of directions into translation coordinates
+ *
+ * @param {Array} directions - Set of directions
+ * @return {Translation} Translation values
+ */
+
 export default directions => {
   const running = { x: 0, y: 0 };
   const transform = [];

@@ -39,18 +39,21 @@ export default {
 
   methods: {
     advancePiece() {
-      if (this.awaitStatus) {
+      if (!this.awaitStatus) {
+        console.error("Cannot move this piece (not awaiting selection)");
+      } else {
         const { color, piece } = this.occupancy.by;
         const increment = this.$store.getters.lastRoll;
 
-        if (color === this.color) {
+        if (color !== this.color) {
+          console.error("Cannot move this piece (different color)");
+        } else {
           const self = this;
 
           this.$store.commit("setAwaitStatus", { target: false });
           this.$store.commit("setAnimationAwait", { target: this.index });
 
           const destination = targetField(this.index, increment, this.color);
-
           const directions = animate(self, this.index, destination);
 
           setTimeout(() => {
@@ -58,11 +61,7 @@ export default {
             self.$store.commit("advancePiece", { color, piece, increment });
             self.$store.commit("setAnimationAwait", { target: 0 });
           }, 300 * directions.length);
-        } else {
-          console.error("Cannot move this piece (different color)");
         }
-      } else {
-        console.error("Cannot move this piece (not awaiting selection)");
       }
     }
   }
