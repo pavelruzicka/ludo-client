@@ -8,18 +8,26 @@ import constants from "../constants";
  * @param {String} color - Player color
  * @return {Number} Target field index
  */
-export default (position, increment, color) => {
+export default (pieces, position, increment, color) => {
   const range = constants.positions.precedingHome[color];
+  let finalPosition = undefined;
 
   if (position >= range.start && position <= range.end) {
     if (position + increment > range.end) {
-      return (
-        constants.positions.home[color] - position - increment + range.end + 1
-      );
+      finalPosition =
+        constants.positions.home[color] - position - increment + range.end + 1;
     } else {
-      return (position + increment) % 40;
+      finalPosition = (position + increment) % 40;
     }
   } else {
-    return (position + increment) % 40;
+    finalPosition = (position + increment) % 40;
   }
+
+  const filtered = pieces.filter(piece => piece.position === finalPosition);
+
+  if (filtered.length > 0 && filtered[0].color === color) {
+    return undefined;
+  }
+
+  return finalPosition;
 };

@@ -54,14 +54,28 @@ export default {
           this.$store.commit("setAwaitStatus", { target: false });
           this.$store.commit("setAnimationAwait", { target: this.index });
 
-          const destination = targetField(this.index, increment, this.color);
-          const directions = animate(self, this.index, destination);
+          const destination = targetField(
+            this.$store.getters.pieces,
+            this.index,
+            increment,
+            this.color
+          );
 
-          setTimeout(() => {
-            self.$store.commit("setTransformStyle", { x: 0, y: 0 });
-            self.$store.commit("advancePiece", { color, piece, increment });
-            self.$store.commit("setAnimationAwait", { target: 0 });
-          }, constants.movement.animationStepTime * directions.length);
+          if (destination === undefined) {
+            console.error("Destination position already occupied");
+          } else {
+            try {
+              const directions = animate(self, this.index, destination);
+
+              setTimeout(() => {
+                self.$store.commit("setTransformStyle", { x: 0, y: 0 });
+                self.$store.commit("advancePiece", { color, piece, increment });
+                self.$store.commit("setAnimationAwait", { target: 0 });
+              }, constants.movement.animationStepTime * directions.length);
+            } catch (e) {
+              console.error("Home overflow (dice roll too high)");
+            }
+          }
         }
       }
     }

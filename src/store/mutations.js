@@ -23,35 +23,28 @@ export default {
       const { start, end } = precedingHome[color];
 
       if (selection.position >= start && selection.position <= end) {
-        // possibly in zone preceding own home
-
         if (selection.position + increment <= end) {
-          // unable to reach home, advance regularly
           selection.position += increment;
         } else {
           if (selection.position + increment <= end + 4) {
-            // able to reach home, check occupancy
             const homePos =
               home[color] - selection.position - increment + end + 1;
 
             const field = state.pieces.filter(p => p.position === homePos)[0];
 
             if (!field) {
-              // desired position not occupied
               selection.position = homePos;
               selection.deployed = false;
               selection.home = true;
+            } else {
+              console.error("Target home position already occupied");
             }
-          } else {
-            // dice roll out of home range, notify player
           }
         }
       } else {
-        // not preceding own home
         selection.position += increment;
 
         if (selection.position > 39) {
-          // ensure board circularity
           selection.position -= 40;
         }
       }

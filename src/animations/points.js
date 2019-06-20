@@ -42,8 +42,6 @@ export default (start, end) => {
     };
   }
 
-  // throws when overshooting home
-
   return {
     points: [
       ...Array(

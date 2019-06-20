@@ -12,6 +12,8 @@ export default {
     }
   },
 
+  pieces: state => state.pieces,
+
   hasPiecesRemaining: state => state.remaining.length > 0,
 
   hasNoPiecesDeployed: state => state.remaining.length === 4,
