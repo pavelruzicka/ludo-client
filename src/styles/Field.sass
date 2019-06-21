@@ -30,3 +30,12 @@
 
       /*&.circle--start
         transform: rotate(map-get($rotation, $name))*/
+
+.piece-transition-enter-active
+  transition: all .5s ease-in
+
+.piece-transition-leave-active
+  transition: all .5s ease-out
+
+.piece-transition-enter, .piece-transition-leave-to
+  opacity: 0

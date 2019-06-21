@@ -1,11 +1,13 @@
 export default {
   occupancyStatus: state => position => {
-    const selection = state.pieces.filter(p => p.position === position)[0];
+    const selection = state.pieces
+      .filter(p => p.position === position)
+      .reverse();
 
-    if (selection) {
+    if (selection.length > 0) {
       return {
         occupied: true,
-        by: selection
+        by: selection[0]
       };
     } else {
       return { occupied: false };
@@ -25,6 +27,8 @@ export default {
   awaitStatus: state => state.awaitStatus,
 
   animationAwait: state => state.animationAwait,
+
+  animationType: state => state.animationType,
 
   lastRoll: state => state.lastRoll,
 

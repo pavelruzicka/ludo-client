@@ -49,7 +49,7 @@ export default {
 
     this.fields = this.fields.map((field, index) => ({ ...field, index }));
 
-    // this.spawn();
+    this.spawn();
   },
 
   methods: {
@@ -59,7 +59,7 @@ export default {
 
     rollDie() {
       //this.dieRoll = Math.floor(Math.random() * 6) + 1;
-      this.dieRoll = 2;
+      this.dieRoll = 6;
 
       this.modalShown = true;
     },
@@ -70,6 +70,7 @@ export default {
       if (action === "deploy") {
         const toDeploy = this.$store.getters.pieceToDeploy;
 
+        this.$store.commit("setAnimationType", { target: "home" });
         this.$store.commit("deployPiece", {
           color: this.color,
           piece: toDeploy

@@ -10,12 +10,9 @@ const initialState = () => ({
   remaining: [],
   awaitStatus: false,
   animationAwait: false,
+  animationType: null,
   lastRoll: 0,
-  pieces: [
-    { color: "red", piece: "a", position: 103, deployed: false, home: true },
-    { color: "red", piece: "b", position: 5, deployed: true, home: false },
-    { color: "green", piece: "b", position: 7, deployed: true, home: false }
-  ],
+  pieces: [],
   transformStyle: { transform: "" }
 });
 

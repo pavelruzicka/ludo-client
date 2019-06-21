@@ -53,6 +53,9 @@ export default {
 
           this.$store.commit("setAwaitStatus", { target: false });
           this.$store.commit("setAnimationAwait", { target: this.index });
+          this.$store.commit("setAnimationType", {
+            target: this.index < 500 ? "default" : "home"
+          });
 
           const destination = targetField(
             this.$store.getters.pieces,
@@ -70,7 +73,7 @@ export default {
               setTimeout(() => {
                 self.$store.commit("setTransformStyle", { x: 0, y: 0 });
                 self.$store.commit("advancePiece", { color, piece, increment });
-                self.$store.commit("setAnimationAwait", { target: 0 });
+                this.$store.commit("setAnimationAwait", { target: null });
               }, constants.movement.animationStepTime * directions.length);
             } catch (e) {
               console.error("Home overflow (dice roll too high)");

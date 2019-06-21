@@ -8,8 +8,9 @@
         start ? `circle--start` : null
       ]"
     >
-      <Piece v-if="occupancy && occupancy.occupied" :occupancy="occupancy" :index="index"/>
-      <!-- {{index}} -->
+      <transition :name="$store.getters.animationType === 'home' ? 'piece-transition' : undefined">
+        <Piece v-if="occupancy && occupancy.occupied" :occupancy="occupancy" :index="index"/>
+      </transition>
     </div>
   </div>
 </template>
