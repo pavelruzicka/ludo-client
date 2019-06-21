@@ -49,6 +49,7 @@ export default {
         }
       }
 
+      state.positionToCheck = selection.position;
       state.pieces = [...remainingPieces, selection];
     }
   },
@@ -105,6 +106,31 @@ export default {
     state.remaining = notation;
   },
 
+  eliminatePiece: (state, payload) => {
+    const { color, piece } = payload;
+    const selection = matchingPiece(state, color, piece);
+    const notation = ["a", "b", "c", "d"];
+
+    if (selection) {
+      if (!selection.deployed) {
+        throw new Error("Cannot eliminate a non-deployed piece");
+      } else {
+        const remainingPieces = state.pieces.filter(p => p !== selection);
+        selection.position =
+          constants.positions.def[color] + notation.indexOf(piece);
+        selection.deployed = false;
+
+        state.pieces = [...remainingPieces, selection];
+
+        if (color === state.color) {
+          state.remaining.push(piece);
+        }
+      }
+    } else {
+      throw new Error("Cannot deploy a non-existent piece");
+    }
+  },
+
   /**
    * Enables game piece selection mode
    *
@@ -125,6 +151,12 @@ export default {
     state.animationAwait = payload.target;
   },
 
+  /**
+   * Determines whether animation takes place inside base ring
+   *
+   * @param {Object} state - Central app state
+   * @param {Number} payload.target - One of "default", "home"
+   */
   setAnimationType: (state, payload) => {
     state.animationType = payload.target;
   },

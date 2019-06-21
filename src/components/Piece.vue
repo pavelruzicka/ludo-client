@@ -72,8 +72,13 @@ export default {
 
               setTimeout(() => {
                 self.$store.commit("setTransformStyle", { x: 0, y: 0 });
-                self.$store.commit("advancePiece", { color, piece, increment });
-                this.$store.commit("setAnimationAwait", { target: null });
+                self.$store.commit("setAnimationAwait", { target: null });
+
+                self.$store.dispatch("advancePiece", {
+                  increment,
+                  color,
+                  piece
+                });
               }, constants.movement.animationStepTime * directions.length);
             } catch (e) {
               console.error("Home overflow (dice roll too high)");

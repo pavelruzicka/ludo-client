@@ -1,8 +1,10 @@
 export default {
-  occupancyStatus: state => position => {
-    const selection = state.pieces
-      .filter(p => p.position === position)
-      .reverse();
+  occupancyStatus: state => (position, reverse = true) => {
+    let selection = state.pieces.filter(p => p.position === position);
+
+    if (reverse) {
+      selection = selection.reverse();
+    }
 
     if (selection.length > 0) {
       return {
@@ -25,6 +27,8 @@ export default {
   color: state => state.color,
 
   awaitStatus: state => state.awaitStatus,
+
+  positionToCheck: state => state.positionToCheck,
 
   animationAwait: state => state.animationAwait,
 

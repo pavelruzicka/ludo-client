@@ -70,6 +70,8 @@ export default {
       if (action === "deploy") {
         const toDeploy = this.$store.getters.pieceToDeploy;
 
+        // TODO: sort out piece collision
+
         this.$store.commit("setAnimationType", { target: "home" });
         this.$store.commit("deployPiece", {
           color: this.color,
