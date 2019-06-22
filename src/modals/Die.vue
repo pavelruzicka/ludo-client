@@ -1,11 +1,10 @@
 <template>
-  <Structure>
+  <Structure :disabled="hasNoPiecesDeployed || !ableToDeploy" @close="execute(null)">
     <span>{{ roll }}</span>
 
     <div style="margin-top: 2rem">
       <button @click="execute('advance')" :disabled="hasNoPiecesDeployed">Advance piece</button>
       <button @click="execute('deploy')" :disabled="!ableToDeploy">Deploy a new piece</button>
-      <button @click="execute(null)" :disabled="!hasNoPiecesDeployed || ableToDeploy">Close modal</button>
     </div>
   </Structure>
 </template>
@@ -38,7 +37,7 @@ export default {
       } else {
         // starting point is occupied, check if by enemy
         if (startingPointOccupancy.by.color !== this.color) {
-          // enemy
+          console.log("enemy on starting point");
           return this.roll === 6 && this.hasPiecesRemaining;
         } else {
           // cannot deploy into own piece

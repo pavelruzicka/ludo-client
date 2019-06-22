@@ -5,7 +5,7 @@
   flex-direction: column
   background: white
   width: 400px
-  padding: 2rem 1rem
+  padding: 1rem 1rem 2rem
   border-radius: .35rem
   text-align: center
   z-index: 110
@@ -14,5 +14,23 @@
     font-weight: bold
     font-size: 2.5rem
 
-  & button
-    margin: .5rem
+.header
+  width: 100%
+  display: flex
+  justify-content: flex-end
+  align-items: flex-center
+
+.close-button
+  background: transparent
+  outline: 0
+  border: 0
+  padding: 0
+  cursor: pointer
+
+  &.disabled
+    cursor: initial
+    opacity: .25
+
+  & svg
+    width: 32px
+    height: 32px

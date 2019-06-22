@@ -14,9 +14,7 @@ const initialState = () => ({
   animationType: null,
   lastRoll: 0,
   positionToCheck: null,
-  pieces: [
-    { color: "green", piece: "b", deployed: true, home: false, position: 22 }
-  ],
+  pieces: [],
   transformStyle: { transform: "" }
 });
 
