@@ -5,7 +5,7 @@
     </div>
 
     <transition name="cloak">
-      <Modal v-if="modalShown" :roll="dieRoll" @hide-modal="execute"/>
+      <Die v-if="modalShown" :roll="dieRoll" @hide-modal="execute"/>
     </transition>
 
     <transition name="cloak">
@@ -20,13 +20,14 @@
 import { mapGetters } from "vuex";
 
 import Board from "./components/Board";
-import Modal from "./components/Modal";
-import Cloak from "./components/Cloak";
+
+import Cloak from "./modals/Cloak";
+import Die from "./modals/Die";
 
 export default {
   name: "app",
 
-  components: { Board, Modal, Cloak },
+  components: { Board, Cloak, Die },
 
   data() {
     return {

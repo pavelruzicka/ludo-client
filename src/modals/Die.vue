@@ -1,28 +1,26 @@
 <template>
-  <Cloak>
-    <div class="modal">
-      <span>{{ roll }}</span>
+  <Structure>
+    <span>{{ roll }}</span>
 
-      <div style="margin-top: 2rem">
-        <button @click="execute('advance')" :disabled="hasNoPiecesDeployed">Advance piece</button>
-        <button @click="execute('deploy')" :disabled="!ableToDeploy">Deploy a new piece</button>
-        <button @click="execute(null)" :disabled="!hasNoPiecesDeployed || ableToDeploy">Close modal</button>
-      </div>
+    <div style="margin-top: 2rem">
+      <button @click="execute('advance')" :disabled="hasNoPiecesDeployed">Advance piece</button>
+      <button @click="execute('deploy')" :disabled="!ableToDeploy">Deploy a new piece</button>
+      <button @click="execute(null)" :disabled="!hasNoPiecesDeployed || ableToDeploy">Close modal</button>
     </div>
-  </Cloak>
+  </Structure>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 
-import Cloak from "./Cloak";
+import Structure from "./Structure";
 
 import constants from "../constants";
 
 export default {
-  name: "modal",
+  name: "die",
 
-  components: { Cloak },
+  components: { Structure },
 
   props: ["roll"],
 
@@ -57,5 +55,3 @@ export default {
   }
 };
 </script>
-
-<style lang="sass" src="../styles/Modal.sass"></style>
