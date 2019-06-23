@@ -5,7 +5,7 @@
     </div>
 
     <transition name="cloak">
-      <Die v-if="modalShown" :roll="dieRoll" @hide-modal="execute"/>
+      <Die v-if="modalShown" @hide-modal="execute"/>
     </transition>
 
     <transition name="cloak">
@@ -59,9 +59,6 @@ export default {
     },
 
     rollDie() {
-      //this.dieRoll = Math.floor(Math.random() * 6) + 1;
-      this.dieRoll = 6;
-
       this.modalShown = true;
     },
 
@@ -79,7 +76,6 @@ export default {
           piece: toDeploy
         });
       } else if (action === "advance") {
-        this.$store.commit("setLastRoll", { value: this.dieRoll });
         this.$store.commit("setAwaitStatus", { target: true });
         this.$store.commit("setAnimationAwait", { target: true });
       }

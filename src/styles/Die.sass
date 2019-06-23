@@ -1,0 +1,18 @@
+@import "mixins"
+  
+.die
+  @include flex-center
+  flex-flow: row wrap
+  width: 5.25rem
+  height: 5.25rem
+  padding: .75rem
+  border-radius: 10px
+  border: .1rem solid #c7c7c7
+
+.dot
+  flex: 0 0 20%
+  height: 20%
+  border-radius: 50%
+
+  &.active
+    background: rgb(44, 44, 46)

@@ -10,7 +10,9 @@
           </svg>
         </button>
       </div>
-      <slot></slot>
+      <div class="content">
+        <slot></slot>
+      </div>
     </div>
   </Cloak>
 </template>

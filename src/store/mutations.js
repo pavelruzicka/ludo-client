@@ -182,5 +182,9 @@ export default {
     state.transformStyle = {
       transform: `translate(${payload.x}rem, ${payload.y}rem)`
     };
+  },
+
+  setRollStatus: (state, payload) => {
+    state.rollReady = payload.target;
   }
 };

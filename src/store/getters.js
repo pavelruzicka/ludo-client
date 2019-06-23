@@ -36,5 +36,7 @@ export default {
 
   lastRoll: state => state.lastRoll,
 
+  rollStatus: state => state.rollReady,
+
   transformStyle: state => state.transformStyle
 };

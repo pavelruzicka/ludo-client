@@ -13,6 +13,7 @@ const initialState = () => ({
   animationAwait: false,
   animationType: null,
   lastRoll: 0,
+  rollReady: false,
   positionToCheck: null,
   pieces: [],
   transformStyle: { transform: "" }
