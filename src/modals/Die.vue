@@ -1,25 +1,27 @@
 <template>
-  <Structure :disabled="hasNoPiecesDeployed || !ableToDeploy" @close="execute(null)">
-    <Die :value="roll"/>
-
+  <Structure :closeable="closeable" @close="execute(null)">
+    {{ roll }}
     <div style="margin-top: 2rem">
-      <button
+      <ModalButton
+        class="modal-button"
+        :enabled="ableToAdvance"
         @click="execute('advance')"
-        :disabled="rollStatus ? hasNoPiecesDeployed : true"
-      >Advance piece</button>
-      <button
+        label="Advance piece"
+      />
+      <ModalButton
+        class="modal-button"
+        :enabled="ableToDeploy"
         @click="execute('deploy')"
-        :disabled="rollStatus ? !ableToDeploy : true"
-      >Deploy a new piece</button>
+        label="Deploy a new piece"
+      />
     </div>
   </Structure>
 </template>
 
 <script>
-import dieSequence from "../logic/dieSequence";
-
 import Structure from "./Structure";
-import Die from "../components/Die";
+
+import ModalButton from "../components/ModalButton";
 
 import { mapGetters } from "vuex";
 import constants from "../constants";
@@ -27,7 +29,7 @@ import constants from "../constants";
 export default {
   name: "die",
 
-  components: { Structure, Die },
+  components: { Structure, ModalButton },
 
   data() {
     return {
@@ -36,19 +38,11 @@ export default {
   },
 
   created() {
-    const sequence = dieSequence(30);
+    //this.roll = Math.floor(Math.random() * 6) + 1;
+    this.roll = 6;
 
-    for (let i = 0; i < sequence.length; i++) {
-      setTimeout(() => {
-        this.roll = sequence[i];
-      }, 100 * (i + 1));
-    }
-
-    setTimeout(() => {
-      this.roll = sequence[sequence.length - 1];
-      this.$store.commit("setLastRoll", { value: this.roll });
-      this.$store.commit("setRollStatus", { target: true });
-    }, 100 * sequence.length);
+    this.$store.commit("setLastRoll", { value: this.roll });
+    this.$store.commit("setRollStatus", { target: true });
   },
 
   computed: {
@@ -77,6 +71,14 @@ export default {
           return false;
         }
       }
+    },
+
+    ableToAdvance() {
+      return !this.hasNoPiecesDeployed;
+    },
+
+    closeable() {
+      return !this.ableToDeploy && !this.ableToAdvance;
     }
   },
 
