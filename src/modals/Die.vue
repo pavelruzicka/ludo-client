@@ -1,6 +1,7 @@
 <template>
   <Structure :closeable="closeable" @close="execute(null)">
-    {{ roll }}
+    <Die class="die" ref="die" @roll="rolled" />
+
     <div style="margin-top: 2rem">
       <ModalButton
         class="modal-button"
@@ -20,8 +21,9 @@
 
 <script>
 import Structure from "./Structure";
-
 import ModalButton from "../components/ModalButton";
+
+import Die from "../die/Main";
 
 import { mapGetters } from "vuex";
 import constants from "../constants";
@@ -29,7 +31,7 @@ import constants from "../constants";
 export default {
   name: "die",
 
-  components: { Structure, ModalButton },
+  components: { Structure, ModalButton, Die },
 
   data() {
     return {
@@ -37,12 +39,10 @@ export default {
     };
   },
 
-  created() {
-    //this.roll = Math.floor(Math.random() * 6) + 1;
-    this.roll = 6;
-
-    this.$store.commit("setLastRoll", { value: this.roll });
-    this.$store.commit("setRollStatus", { target: true });
+  mounted() {
+    setTimeout(() => {
+      this.$refs.die.rollCube();
+    }, 1);
   },
 
   computed: {
@@ -54,6 +54,10 @@ export default {
     ]),
 
     ableToDeploy() {
+      if (this.roll === 0) {
+        return false;
+      }
+
       const startingPosition = constants.positions.start[this.color];
       const startingPointOccupancy = this.$store.getters.occupancyStatus(
         startingPosition
@@ -74,10 +78,18 @@ export default {
     },
 
     ableToAdvance() {
+      if (this.roll === 0) {
+        return false;
+      }
+
       return !this.hasNoPiecesDeployed;
     },
 
     closeable() {
+      if (this.roll === 0) {
+        return false;
+      }
+
       return !this.ableToDeploy && !this.ableToAdvance;
     }
   },
@@ -85,6 +97,13 @@ export default {
   methods: {
     execute(action) {
       this.$emit("hide-modal", { action });
+    },
+
+    rolled(dieValue) {
+      this.roll = dieValue;
+
+      this.$store.commit("setLastRoll", { value: dieValue });
+      this.$store.commit("setRollStatus", { target: true });
     }
   }
 };

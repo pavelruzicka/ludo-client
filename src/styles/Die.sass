@@ -1,18 +1,40 @@
-@import "mixins"
-  
 .die
-  @include flex-center
-  flex-flow: row wrap
-  width: 5.25rem
-  height: 5.25rem
-  padding: .75rem
-  border-radius: 10px
-  border: .1rem solid #c7c7c7
+  transform: scale(0.35)
+
+.die-container
+  width: 200px
+  height: 200px
+  position: relative
+  margin: 0 auto
+  perspective: 1000px
+  perspective-origin: 50% 100%
+
+.die-face
+  background: #f3f3f3
+  box-shadow: inset 0 0 40px 20px #e0e0e0
+  position: absolute
+  width: 200px
+  height: 200px
+  padding: 25% 0
+  border-radius: 50px
+
+.die-face-background  
+  background: rgb(220, 220, 220)
+  width: 100%
+  height: 100%
+  position: absolute
+
+.cube
+  width: 100%
+  height: 100%
+  position: absolute
+  transform-style: preserve-3d
+  transition-property: transform
 
 .dot
-  flex: 0 0 20%
-  height: 20%
+  position: absolute
+  width: 30px
+  height: 30px
+  background: #191919
   border-radius: 50%
-
-  &.active
-    background: rgb(44, 44, 46)
+  box-shadow: inset -2px -2px 0px 3px black
