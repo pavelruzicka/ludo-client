@@ -1,6 +1,6 @@
 <template>
   <Face transform="translateZ(100px)">
-    <Dot :top="85" :left="85" />
+    <Dot v-for="(dot, index) in dots" :key="index" :top="dot[0]" :left="dot[1]" />
   </Face>
 </template>
 
@@ -13,6 +13,12 @@ export default {
   components: {
     Dot,
     Face
+  },
+
+  data() {
+    return {
+      dots: [[85, 85]]
+    };
   }
 };
 </script>

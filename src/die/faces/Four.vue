@@ -1,9 +1,6 @@
 <template>
   <Face transform="rotateY(-90deg) translateZ(100px)">
-    <Dot :top="45" :left="45" />
-    <Dot :top="45" :left="125" />
-    <Dot :top="125" :left="45" />
-    <Dot :top="125" :left="125" />
+    <Dot v-for="(dot, index) in dots" :key="index" :top="dot[0]" :left="dot[1]" />
   </Face>
 </template>
 
@@ -16,6 +13,12 @@ export default {
   components: {
     Dot,
     Face
+  },
+
+  data() {
+    return {
+      dots: [[45, 45], [45, 125], [125, 45], [125, 125]]
+    };
   }
 };
 </script>
