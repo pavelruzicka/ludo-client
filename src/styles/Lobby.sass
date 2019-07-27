@@ -1,0 +1,29 @@
+.pieces
+  margin: 2rem 0
+  width: 100%
+  padding: 0 1.5rem
+  display: flex
+  justify-content: space-around
+  align-items: center
+
+.piece-box
+  width: 7rem
+  display: flex
+  flex-flow: column
+
+.piece-nickname
+  width: 7rem
+  margin-top: .5rem
+
+  &--self
+    font-weight: bold
+
+  &--default
+    opacity: .25
+
+  & span
+    white-space: nowrap
+    text-overflow: clip
+    display: block
+    overflow: hidden
+    width: 7rem

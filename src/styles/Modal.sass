@@ -4,15 +4,19 @@
   @include flex-center
   flex-direction: column
   background: white
-  width: 400px
+  min-width: 400px
   padding: 1rem 1rem 2rem
   border-radius: .35rem
   text-align: center
   z-index: 110
 
-  & span
-    font-weight: bold
-    font-size: 2.5rem
+.modal-input
+  @include form-element
+  border-color: #b5b5b5
+  box-shadow: none
+  outline: 0
+  width: 100%
+  white-space: nowrap
 
 .header
   width: 100%
@@ -38,4 +42,23 @@
 .content  
   @include flex-center
   flex-direction: column
+  width: 100%
   padding: .5rem 0 2rem
+
+.button-row
+  margin-top: 2rem
+  padding: 0 20px
+  width: 100%
+  display: flex
+  justify-content: space-between
+
+  & ~ &
+    margin-top: .25rem
+
+  &--centered
+    justify-content: center
+
+.button-group
+
+  &--fullwidth
+    flex: 1 1 100%  

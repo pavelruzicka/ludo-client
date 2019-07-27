@@ -2,19 +2,21 @@
   <Structure :closeable="closeable" @close="execute(null)">
     <Die class="die" ref="die" @roll="rolled" />
 
-    <div style="margin-top: 2rem">
-      <ModalButton
-        class="modal-button"
-        :enabled="ableToAdvance"
-        @click="execute('advance')"
-        label="Advance piece"
-      />
-      <ModalButton
-        class="modal-button"
-        :enabled="ableToDeploy"
-        @click="execute('deploy')"
-        label="Deploy a new piece"
-      />
+    <div class="button-row button-row--centered">
+      <div class="button-group">
+        <ModalButton
+          class="modal-button"
+          :enabled="ableToAdvance"
+          @click="execute('advance')"
+          label="Advance piece"
+        />
+        <ModalButton
+          class="modal-button"
+          :enabled="ableToDeploy"
+          @click="execute('deploy')"
+          label="Deploy a new piece"
+        />
+      </div>
     </div>
   </Structure>
 </template>

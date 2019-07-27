@@ -1,15 +1,9 @@
-.modal-button 
-  background-color: #fff
+@import "mixins"
+  
+.modal-button
+  @include form-element
   border-color: #dbdbdb
-  border-width: 1px
-  color: #363636
-  cursor: pointer
-  justify-content: center
-  padding: .475rem .75rem
-  margin: .25rem
-  font-size: 13px
   text-align: center
-  white-space: nowrap
 
   &:hover
     border-color: #b5b5b5
@@ -26,3 +20,6 @@
     box-shadow: none
     opacity: .25
     cursor: not-allowed
+
+  & svg
+    width: 16px

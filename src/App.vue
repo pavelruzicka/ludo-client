@@ -2,17 +2,22 @@
   <div id="app">
     <div>
       <button @click="rollDie()">Roll die</button>
+      <button @click="openLobby()">Lobby</button>
     </div>
 
     <transition name="cloak">
-      <DieModal v-if="modalShown" @hide-modal="execute"/>
+      <LobbyModal v-if="lobbyModalShown" />
     </transition>
 
     <transition name="cloak">
-      <Cloak v-if="awaitStatus"/>
+      <DieModal v-if="gameModalShown" @hide-modal="execute" />
     </transition>
 
-    <Board :fields="fields"/>
+    <transition name="cloak">
+      <Cloak v-if="awaitStatus" />
+    </transition>
+
+    <Board :fields="fields" />
   </div>
 </template>
 
@@ -23,15 +28,17 @@ import Board from "./components/Board";
 
 import Cloak from "./modals/Cloak";
 import DieModal from "./modals/Die";
+import LobbyModal from "./modals/Lobby";
 
 export default {
   name: "app",
 
-  components: { Board, Cloak, DieModal },
+  components: { Board, Cloak, DieModal, LobbyModal },
 
   data() {
     return {
-      modalShown: false,
+      gameModalShown: false,
+      lobbyModalShown: false,
       dieRoll: undefined
     };
   },
@@ -58,12 +65,16 @@ export default {
       this.$store.commit("spawnSet", { color: "red" });
     },
 
+    openLobby() {
+      this.lobbyModalShown = true;
+    },
+
     rollDie() {
-      this.modalShown = true;
+      this.gameModalShown = true;
     },
 
     execute({ action }) {
-      this.modalShown = false;
+      this.gameModalShown = false;
 
       if (action === "deploy") {
         const toDeploy = this.$store.getters.pieceToDeploy;
