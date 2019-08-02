@@ -2,8 +2,20 @@
   <div id="app">
     <div>
       <button @click="rollDie()">Roll die</button>
+      <button @click="intro()">intro</button>
       <button @click="openLobby()">Lobby</button>
+      <br />
+      <hr />
+      <button @click="create()">create</button>
+      <button @click="join()">join</button>
+      <button @click="leave()">leave</button>
+      <button @click="lobbies()">lobbies</button>
+      <button @click="players()">players</button>
     </div>
+
+    <transition name="cloak">
+      <IntroModal v-if="introModalShown" />
+    </transition>
 
     <transition name="cloak">
       <LobbyModal v-if="lobbyModalShown" />
@@ -29,22 +41,54 @@ import Board from "./components/Board";
 import Cloak from "./modals/Cloak";
 import DieModal from "./modals/Die";
 import LobbyModal from "./modals/Lobby";
+import IntroModal from "./modals/Intro";
+
+const signalR = require("@aspnet/signalr");
+
+const connection = new signalR.HubConnectionBuilder()
+  .withUrl("https://ludo.azurewebsites.net/game")
+  .build();
+
+connection.on("lobby:player-join", id => {
+  console.log(`player ${id} joined lobby`);
+});
+
+connection.on("lobby:player-leave", id => {
+  console.log(`player ${id} left lobby`);
+});
+
+connection.on("lobby:lobbies", lobbies => {
+  console.log(`current lobbies: ${lobbies}`);
+});
+
+connection.on("lobby:players", players => {
+  console.log(players);
+});
 
 export default {
   name: "app",
 
-  components: { Board, Cloak, DieModal, LobbyModal },
+  components: { Board, Cloak, DieModal, LobbyModal, IntroModal },
 
   data() {
     return {
       gameModalShown: false,
       lobbyModalShown: false,
+      introModalShown: false,
       dieRoll: undefined
     };
   },
 
   computed: {
     ...mapGetters(["color", "awaitStatus"])
+  },
+
+  mounted() {
+    try {
+      connection.start();
+    } catch (e) {
+      console.error(e);
+    }
   },
 
   created() {
@@ -63,6 +107,10 @@ export default {
   methods: {
     spawn() {
       this.$store.commit("spawnSet", { color: "red" });
+    },
+
+    intro() {
+      this.introModalShown = true;
     },
 
     openLobby() {
@@ -90,6 +138,26 @@ export default {
         this.$store.commit("setAwaitStatus", { target: true });
         this.$store.commit("setAnimationAwait", { target: true });
       }
+    },
+
+    create() {
+      connection.invoke("lobby:create", "test");
+    },
+
+    join() {
+      connection.invoke("lobby:join", "test");
+    },
+
+    leave() {
+      connection.invoke("lobby:leave");
+    },
+
+    lobbies() {
+      connection.invoke("lobby:get-lobbies");
+    },
+
+    players() {
+      connection.invoke("lobby:get-players", "test");
     }
   }
 };

@@ -63,9 +63,6 @@ import ModalButton from "../components/ModalButton";
 import LobbyPiece from "../components/Lobby/LobbyPiece";
 import LobbyStatus from "../components/Lobby/LobbyStatus";
 
-import { mapGetters } from "vuex";
-import constants from "../constants";
-
 Vue.use(VueClipboard);
 
 export default {
