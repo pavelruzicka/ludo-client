@@ -2,7 +2,6 @@
   <div id="app">
     <div>
       <button @click="rollDie()">Roll die</button>
-      <button @click="intro()">intro</button>
       <button @click="openLobby()">Lobby</button>
       <br />
       <hr />
@@ -14,7 +13,7 @@
     </div>
 
     <transition name="cloak">
-      <IntroModal v-if="introModalShown" />
+      <IntroModal v-if="introModalShown" @hide-modal="createLobby" />
     </transition>
 
     <transition name="cloak">
@@ -43,27 +42,7 @@ import DieModal from "./modals/Die";
 import LobbyModal from "./modals/Lobby";
 import IntroModal from "./modals/Intro";
 
-const signalR = require("@aspnet/signalr");
-
-const connection = new signalR.HubConnectionBuilder()
-  .withUrl("https://ludo.azurewebsites.net/game")
-  .build();
-
-connection.on("lobby:player-join", id => {
-  console.log(`player ${id} joined lobby`);
-});
-
-connection.on("lobby:player-leave", id => {
-  console.log(`player ${id} left lobby`);
-});
-
-connection.on("lobby:lobbies", lobbies => {
-  console.log(`current lobbies: ${lobbies}`);
-});
-
-connection.on("lobby:players", players => {
-  console.log(players);
-});
+import { api } from "./http/api";
 
 export default {
   name: "app",
@@ -72,9 +51,9 @@ export default {
 
   data() {
     return {
-      gameModalShown: false,
-      lobbyModalShown: false,
       introModalShown: false,
+      lobbyModalShown: false,
+      gameModalShown: false,
       dieRoll: undefined
     };
   },
@@ -83,9 +62,11 @@ export default {
     ...mapGetters(["color", "awaitStatus"])
   },
 
-  mounted() {
+  async mounted() {
+    this.introModalShown = true;
+
     try {
-      connection.start();
+      await api.start();
     } catch (e) {
       console.error(e);
     }
@@ -107,10 +88,6 @@ export default {
   methods: {
     spawn() {
       this.$store.commit("spawnSet", { color: "red" });
-    },
-
-    intro() {
-      this.introModalShown = true;
     },
 
     openLobby() {
@@ -140,24 +117,37 @@ export default {
       }
     },
 
-    create() {
-      connection.invoke("lobby:create", "test");
+    createLobby({ lobby }) {
+      this.introModalShown = false;
+      this.lobbyModalShown = true;
+
+      console.log(lobby);
     },
 
-    join() {
-      connection.invoke("lobby:join", "test");
+    async create() {
+      await api.invoke("lobby:create", "twentytwocharacterstri");
     },
 
-    leave() {
-      connection.invoke("lobby:leave");
+    async join() {
+      await api.invoke("lobby:join", "twentytwocharacterstri");
     },
 
-    lobbies() {
-      connection.invoke("lobby:get-lobbies");
+    async leave() {
+      await api.invoke("lobby:leave");
     },
 
-    players() {
-      connection.invoke("lobby:get-players", "test");
+    async lobbies() {
+      const lobbies = await api.invoke("lobby:get-lobbies");
+      console.log(lobbies);
+    },
+
+    async players() {
+      const players = await api.invoke(
+        "lobby:get-players",
+        "twentytwocharacterstri"
+      );
+
+      console.log(players);
     }
   }
 };
